@@ -1,0 +1,48 @@
+{
+  "project": "枢游记互动答辩展示页",
+  "hero": {
+    "file": "山水旅程-hero.png",
+    "type": "AI-generated atmospheric background",
+    "usage": "first-screen visual only; no text or product UI",
+    "prompt": "A cinematic Chinese mountain-and-river travel panorama at dawn, with subtle pixel-art texture inspired by the project's own travel-poster mood; layered teal-green mountains, pale sky, warm orange sunrise, calm water, no people, no text, no logos, 16:9"
+  },
+  "scenicBackgrounds": {
+    "type": "AI-generated atmospheric background illustrations",
+    "styleReference": "codex-clipboard-bea2908b-f5c8-40c8-aa49-82346c2ff50c.png; used for visual style and palette only",
+    "files": [
+      {
+        "file": "晨雾河谷背景.webp",
+        "usage": "Journey chapters, image-repair chapter, device-adaptation chapter, proof chapter, and darkened memory chapter",
+        "scene": "A winding river through layered karst valleys at blue-hour dawn with mist, a stone path, and a peach sunrise"
+      },
+      {
+        "file": "云海湖泊背景.webp",
+        "usage": "Prologue, selected journey chapters, intelligence chapter, and proof chapter",
+        "scene": "A still lake in a mist-filled mountain basin with layered peaks and soft dawn light"
+      }
+    ],
+    "promptNotes": "Generated as companion compositions matching the reference's painterly pixel-art landscape style; no text, logos, people, or product UI. Converted to WebP for local delivery."
+  },
+  "productScreenshots": {
+    "type": "existing project screenshots",
+    "source": "C:/Users/36712/Desktop/123123/imgFix",
+    "filesUsed": [
+      "软件图标.png",
+      "手机端主页.png",
+      "平板端主页.png",
+      "旅行计划.png",
+      "去雾.png",
+      "图像清晰化.png",
+      "手动修图页面.png",
+      "文化知识获取_智能体.png",
+      "智能客服发送图片.png",
+      "智能客服_指令模式.png",
+      "续写2.png",
+      "旅行记忆.png",
+      "花费记账.png",
+      "备忘录.png",
+      "服务卡片.png"
+    ],
+    "usage": "feature evidence and fullscreen previews; not generated or redrawn"
+  }
+}
