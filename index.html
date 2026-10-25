@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800;900&family=Noto+Serif+SC:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/山水旅程-hero.png">
-  <link rel="stylesheet" href="styles.css?v=20261025-one-screen">
-  <script src="app.js" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20261025-journey-v8">
+  <script src="app.js?v=20261025-journey-v8" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
@@ -19,7 +19,7 @@
   <header class="site-header" id="siteHeader">
     <div class="container header-inner">
       <a class="brand" href="#top" aria-label="枢游记，返回开篇">
-        <img src="assets/软件图标.png" width="40" height="41" alt="">
+        <img src="assets/枢游记-app-icon.jpg" width="44" height="44" alt="">
         <span>枢游记<small>SHU YOU JI</small></span>
       </a>
       <nav class="primary-nav" id="primaryNav" aria-label="页面章节">
@@ -55,7 +55,7 @@
           <div class="hero-marker"><span>01</span><i></i><span>04</span></div>
           <p>一条旅行主线<br>四个连续时刻</p>
           <div class="hero-device">
-            <img src="assets/手机端主页.png" width="468" height="1015" alt="枢游记手机端首页，展示修复和文化知识入口">
+            <img src="assets/手机端主页.png?v=20261025-journey-v8" width="1280" height="2832" alt="枢游记手机端首页，展示修复和文化知识入口">
           </div>
         </div>
       </div>
@@ -82,11 +82,17 @@
       <div class="container journey-heading">
         <div class="section-index"><span>第一章</span><span>ONE CONNECTED JOURNEY</span></div>
         <h2 id="journeyTitle">跟随一次旅行，<br>看功能如何自然发生。</h2>
-        <p>四个时刻收在同一屏里，点击右侧标签即可切换对应界面；向下滚动再继续看完整答辩内容。</p>
+        <p>向下滚动，依次走过出发前、旅行中、旅行后与长期陪伴；每个阶段都能查看完整界面。</p>
+        <nav class="journey-phase-links" aria-label="旅行阶段">
+          <a href="#chapter-before" data-journey-link="before">01 出发前</a>
+          <a href="#chapter-during" data-journey-link="during">02 旅行中</a>
+          <a href="#chapter-after" data-journey-link="after">03 旅行后</a>
+          <a href="#chapter-continuity" data-journey-link="continuity">04 长期陪伴</a>
+        </nav>
       </div>
       <div class="container journey-layout">
         <div class="journey-chapters" id="journeyChapters">
-          <article class="journey-chapter is-active" id="chapter-before" data-scene="before" role="tabpanel" aria-labelledby="journey-tab-before" tabindex="0">
+          <article class="journey-chapter" id="chapter-before" data-scene="before">
             <div class="chapter-copy">
               <span class="chapter-number">01 / BEFORE</span>
               <h3>出发前，<br>先把未知变成计划。</h3>
@@ -94,9 +100,9 @@
               <ul><li>天气查询与生活建议</li><li>文化知识与可追问的智能体</li><li>旅行计划和行程状态</li></ul>
               <a href="#intelligence" class="chapter-link">探索智能能力 <span aria-hidden="true">↗</span></a>
             </div>
-            <figure class="chapter-mobile-media"><img src="assets/旅行计划.png" width="481" height="975" loading="lazy" alt="枢游记旅行计划界面"><figcaption>真实界面 · 旅行计划</figcaption></figure>
+            <figure class="chapter-mobile-media"><button type="button" class="chapter-image-zoom" data-lightbox="assets/旅行计划.png|旅行计划|出发前的计划与行程界面"><img src="assets/旅行计划.png?v=20261025-journey-v8" width="1280" height="2832" loading="lazy" alt="枢游记旅行计划界面"><span>查看完整截图 ↗</span></button><figcaption>真实界面 · 旅行计划</figcaption></figure>
           </article>
-          <article class="journey-chapter" id="chapter-during" data-scene="during" role="tabpanel" aria-labelledby="journey-tab-during" tabindex="0" hidden>
+          <article class="journey-chapter" id="chapter-during" data-scene="during">
             <div class="chapter-copy">
               <span class="chapter-number">02 / ON THE ROAD</span>
               <h3>旅行中，<br>把注意力留给现场。</h3>
@@ -104,9 +110,9 @@
               <ul><li>去雾、清晰化与手动修图</li><li>分类花费与统计</li><li>优先级备忘与完成状态</li></ul>
               <a href="#repair" class="chapter-link">查看影像流程 <span aria-hidden="true">↗</span></a>
             </div>
-            <figure class="chapter-mobile-media"><img src="assets/去雾.png" width="483" height="1013" loading="lazy" alt="枢游记图像去雾结果界面"><figcaption>真实界面 · 图像去雾</figcaption></figure>
+            <figure class="chapter-mobile-media"><button type="button" class="chapter-image-zoom" data-lightbox="assets/手机端主页.png|旅行中的修复入口|当前应用的照片上传与处理入口"><img src="assets/手机端主页.png?v=20261025-journey-v8" width="1280" height="2832" loading="lazy" alt="枢游记当前修复首页，提供照片上传、去雾与增强入口"><span>查看完整截图 ↗</span></button><figcaption>新版原生界面 · 修复入口</figcaption></figure>
           </article>
-          <article class="journey-chapter" id="chapter-after" data-scene="after" role="tabpanel" aria-labelledby="journey-tab-after" tabindex="0" hidden>
+          <article class="journey-chapter" id="chapter-after" data-scene="after">
             <div class="chapter-copy">
               <span class="chapter-number">03 / AFTER</span>
               <h3>回家后，<br>让照片重新讲述故事。</h3>
@@ -114,34 +120,18 @@
               <ul><li>照片、位置与日记统一保存</li><li>旅行记忆创建、编辑与删除</li><li>选中文本后的续写辅助</li></ul>
               <a href="#memory" class="chapter-link">看旅行记忆 <span aria-hidden="true">↗</span></a>
             </div>
-            <figure class="chapter-mobile-media"><img src="assets/旅行记忆.png" width="480" height="1017" loading="lazy" alt="枢游记旅行记忆界面"><figcaption>真实界面 · 旅行记忆</figcaption></figure>
+            <figure class="chapter-mobile-media"><button type="button" class="chapter-image-zoom" data-lightbox="assets/旅行记忆.png|旅行记忆|旅行后的照片、地点与文字入口"><img src="assets/旅行记忆.png?v=20261025-journey-v8" width="1280" height="2832" loading="lazy" alt="枢游记旅行记忆界面"><span>查看完整截图 ↗</span></button><figcaption>真实界面 · 旅行记忆</figcaption></figure>
           </article>
-          <article class="journey-chapter" id="chapter-continuity" data-scene="continuity" role="tabpanel" aria-labelledby="journey-tab-continuity" tabindex="0" hidden>
+          <article class="journey-chapter" id="chapter-continuity" data-scene="continuity">
             <div class="chapter-copy">
               <span class="chapter-number">04 / CONTINUE</span>
-              <h3>下一次打开，<br>旅程仍然在这里。</h3>
-              <p>操作日志为状态恢复提供依据；账号同步与服务卡片让内容在合适的时间再次出现。相关跨设备能力仍有明确的验证边界。</p>
-              <ul><li>关键操作记录与启动恢复</li><li>账号隔离、版本合并与冲突提示</li><li>六张 HarmonyOS 服务卡片</li></ul>
+              <h3>把下一步留在备忘录里。</h3>
+              <p>旅程还在继续时，备忘录可以把待办、优先级和日期收在一起。关键操作记录为状态恢复提供依据；当前展示的是新版应用里的备忘录编辑界面。</p>
+              <ul><li>设置提醒内容、优先级与日期</li><li>旅行计划、备忘和花费沿着旅程组织</li><li>重启后的状态恢复可按演示环境核对</li></ul>
               <a href="#proof" class="chapter-link">了解验证边界 <span aria-hidden="true">↗</span></a>
             </div>
-            <figure class="chapter-mobile-media"><img src="assets/服务卡片.png" width="445" height="694" loading="lazy" alt="枢游记服务卡片界面"><figcaption>真实界面 · 服务卡片</figcaption></figure>
+            <figure class="chapter-mobile-media"><button type="button" class="chapter-image-zoom" data-lightbox="assets/备忘录.png|旅行备忘|长期陪伴中的备忘编辑界面"><img src="assets/备忘录.png?v=20261025-journey-v8" width="1280" height="2832" loading="lazy" alt="新版枢游记备忘录编辑界面"><span>查看完整截图 ↗</span></button><figcaption>新版界面 · 旅行备忘</figcaption></figure>
           </article>
-        </div>
-        <div class="journey-stage-wrap">
-          <div class="journey-stage">
-            <div class="stage-topline"><span id="stageKicker">01 / 出发前</span><span>枢游记 · 真实界面</span></div>
-            <div class="stage-image-area">
-              <div class="stage-glow" aria-hidden="true"></div>
-              <img id="stageImage" src="assets/旅行计划.png" width="481" height="975" alt="枢游记旅行计划界面">
-            </div>
-            <div class="stage-bottom"><strong id="stageTitle">先把未知变成计划</strong><span id="stageCount">01 / 04</span></div>
-            <div class="stage-steps" id="journeyTabs" role="tablist" aria-label="旅行章节">
-              <button type="button" id="journey-tab-before" role="tab" aria-controls="chapter-before" aria-selected="true" tabindex="0" data-jump="before" class="is-active" aria-label="出发前"><span></span>出发前</button>
-              <button type="button" id="journey-tab-during" role="tab" aria-controls="chapter-during" aria-selected="false" tabindex="-1" data-jump="during" aria-label="旅行中"><span></span>旅行中</button>
-              <button type="button" id="journey-tab-after" role="tab" aria-controls="chapter-after" aria-selected="false" tabindex="-1" data-jump="after" aria-label="旅行后"><span></span>旅行后</button>
-              <button type="button" id="journey-tab-continuity" role="tab" aria-controls="chapter-continuity" aria-selected="false" tabindex="-1" data-jump="continuity" aria-label="长期陪伴"><span></span>长期陪伴</button>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -151,28 +141,27 @@
         <div class="section-index"><span>第二章</span><span>IMAGE WORKFLOW</span></div>
         <div class="split-heading">
           <h2 id="repairTitle">一张旅行照片，<br>值得被认真对待。</h2>
-          <p>选择一种问题，看看对应的真实操作界面和处理路径。结果图保持原比例，点击即可查看完整截图。</p>
+          <p>查看当前应用的修复首页与手动编辑界面。旧版嵌入页面截图已从展示中移除；点击新版截图可放大查看完整原图。</p>
         </div>
         <div class="repair-workbench">
           <div class="repair-nav" role="tablist" aria-label="影像修复方式">
-            <button type="button" role="tab" aria-selected="true" data-repair="dehaze"><span>01</span><strong>去雾</strong><small>还原雾天远景的层次</small></button>
-            <button type="button" role="tab" aria-selected="false" data-repair="upscale"><span>02</span><strong>清晰化</strong><small>重建模糊照片的细节</small></button>
-            <button type="button" role="tab" aria-selected="false" data-repair="edit"><span>03</span><strong>手动编辑</strong><small>把表达权交还给用户</small></button>
+            <button type="button" role="tab" aria-selected="true" data-repair="entry"><span>01</span><strong>新版修复首页</strong><small>当前应用的照片处理入口</small></button>
+            <button type="button" role="tab" aria-selected="false" data-repair="edit"><span>02</span><strong>手动编辑</strong><small>保留即时调整与个人判断</small></button>
           </div>
           <div class="repair-preview" id="repairPanel" role="tabpanel">
-            <button class="image-zoom" type="button" id="repairZoom" aria-label="放大查看去雾界面">
-              <img id="repairImage" src="assets/去雾.png" width="483" height="1013" loading="lazy" alt="枢游记图像去雾原图与结果对照界面">
+            <button class="image-zoom" type="button" id="repairZoom" aria-label="放大查看新版修复首页">
+              <img id="repairImage" src="assets/手机端主页.png?v=20261025-journey-v8" width="1280" height="2832" loading="lazy" alt="枢游记当前原生修复首页，含照片上传与去雾、增强入口">
               <span>点击查看完整界面 ↗</span>
             </button>
           </div>
           <div class="repair-description">
-            <span class="detail-index" id="repairIndex">01 / DEHAZE</span>
-            <h3 id="repairHeading">让雾气退后，<br>让画面走近。</h3>
-            <p id="repairText">基于暗通道先验的去雾处理放在 WebView 工作流中，提供参数调节与修复前后查看。用户可以先使用默认值，再根据照片情况微调。</p>
-            <dl id="repairFacts"><div><dt>处理方式</dt><dd>暗通道先验与图像增强</dd></div><div><dt>交互特点</dt><dd>默认参数、手动调节、前后查看</dd></div><div><dt>使用场景</dt><dd>山景、远景与雾天旅行照片</dd></div></dl>
+            <span class="detail-index" id="repairIndex">01 / CURRENT APP</span>
+            <h3 id="repairHeading">从新版修复首页，<br>进入需要的工具。</h3>
+            <p id="repairText">这张截图来自当前应用的原生首页，展示照片上传入口与去雾、增强、上色能力。它不冒充旧版嵌入页面的操作截图。</p>
+            <dl id="repairFacts"><div><dt>当前画面</dt><dd>新版原生修复首页</dd></div><div><dt>功能入口</dt><dd>上传照片后选择修复工具</dd></div><div><dt>图片显示</dt><dd>完整原图比例，可点击放大</dd></div></dl>
           </div>
         </div>
-        <p class="repair-note">批量图片处理已有最多 10 张的处理入口与三档压缩策略；AI 批量修复和设备端效果仍需按实际环境验证。</p>
+        <p class="repair-note">已核对当前 HAP：去雾与图像增强仍打开较早的嵌入页面，尚无重构后的新版详情截图，因此本页不再展示旧版截图；当前原生修复入口和手动编辑界面均来自新版应用。</p>
       </div>
     </section>
 
@@ -181,22 +170,22 @@
         <div class="section-index"><span>第三章</span><span>ASK · UNDERSTAND · CREATE</span></div>
         <div class="split-heading">
           <h2 id="intelligenceTitle">目的地不只是一条搜索结果。</h2>
-          <p>从本地文化知识，到可以追问的智能体，再到图片与文字辅助。点击四个场景，查看各自对应的应用界面。</p>
+          <p>从知识入口、智能客服到旅行计划与记忆记录。点击查看四张从当前应用取得的完整界面截图。</p>
         </div>
         <div class="intelligence-layout">
           <div class="ai-selector" role="tablist" aria-label="智能服务场景">
-            <button type="button" role="tab" aria-selected="true" data-ai="culture"><b>01</b><span>问文化<small>历史、风俗与目的地知识</small></span></button>
-            <button type="button" role="tab" aria-selected="false" data-ai="photo"><b>02</b><span>看图片<small>视觉分析后组织回答</small></span></button>
-            <button type="button" role="tab" aria-selected="false" data-ai="command"><b>03</b><span>做计划<small>将自然语言转为行动线索</small></span></button>
-            <button type="button" role="tab" aria-selected="false" data-ai="writing"><b>04</b><span>续写记忆<small>在日记里延续表达</small></span></button>
+            <button type="button" role="tab" aria-selected="true" data-ai="culture"><b>01</b><span>知识入口<small>功能介绍与新手引导</small></span></button>
+            <button type="button" role="tab" aria-selected="false" data-ai="photo"><b>02</b><span>智能对话<small>欢迎信息与快捷入口</small></span></button>
+            <button type="button" role="tab" aria-selected="false" data-ai="command"><b>03</b><span>旅行计划<small>查看和管理行程</small></span></button>
+            <button type="button" role="tab" aria-selected="false" data-ai="writing"><b>04</b><span>旅行记忆<small>新建记忆与照片地图</small></span></button>
           </div>
           <div class="ai-display" id="aiPanel" role="tabpanel">
-            <div class="ai-caption"><span id="aiLabel">文化探索 / 智能体模式</span><strong id="aiTitle">从“这是什么”到“它为什么值得看”</strong></div>
-            <button class="image-zoom ai-image" type="button" id="aiZoom" aria-label="放大查看文化知识智能体界面">
-              <img id="aiImage" src="assets/文化知识获取_智能体.png" width="460" height="1003" loading="lazy" alt="枢游记文化知识智能体界面">
+            <div class="ai-caption"><span id="aiLabel">知识页 / 新手引导入口</span><strong id="aiTitle">先了解工具，再继续探索目的地</strong></div>
+            <button class="ai-image" type="button" id="aiZoom" aria-label="放大查看新版知识页与新手引导">
+              <img id="aiImage" src="assets/文化知识获取_智能体.png?v=20261025-journey-v8" width="1280" height="2832" loading="lazy" alt="新版枢游记知识页，展示新手引导与功能介绍">
             </button>
           </div>
-          <aside class="ai-context"><p id="aiDescription">本地知识库提供结构化的目的地信息，智能体允许用户围绕同一处景点继续提问。内容从“查到”走向“理解”。</p><div class="ai-source"><span>能力来源</span><strong id="aiSource">KnowledgeBase · KgService · AiService</strong></div></aside>
+          <aside class="ai-context"><p id="aiDescription">新版知识页提供核心功能介绍与可重新打开的新手引导入口。本图呈现知识页当前状态；目的地问答由智能体模式承载，可围绕景点继续深入提问。</p><div class="ai-source"><span>能力来源</span><strong id="aiSource">Knowledge Page · User Guide · Agent Mode</strong></div></aside>
         </div>
       </div>
     </section>
@@ -214,29 +203,25 @@
           </div>
         </div>
         <div class="memory-collage">
-          <button type="button" class="memory-shot memory-main" data-lightbox="assets/旅行记忆.png|旅行记忆|照片、地点与旅行日记在同一个入口中回看。"><img src="assets/旅行记忆.png" width="480" height="1017" loading="lazy" alt="旅行记忆界面"><span>旅行记忆 ↗</span></button>
-          <button type="button" class="memory-shot memory-small memory-expense" data-lightbox="assets/花费记账.png|旅行花费|按类别记录旅行中的支出。"><img src="assets/花费记账.png" width="460" height="1006" loading="lazy" alt="花费记账界面"><span>花费记录 ↗</span></button>
-          <button type="button" class="memory-shot memory-small memory-note" data-lightbox="assets/备忘录.png|旅行备忘|记录提醒并跟踪完成状态。"><img src="assets/备忘录.png" width="450" height="987" loading="lazy" alt="备忘录界面"><span>旅行备忘 ↗</span></button>
+          <button type="button" class="memory-shot memory-main" data-lightbox="assets/旅行记忆.png|旅行记忆|照片、地点与旅行日记在同一个入口中回看。"><img src="assets/旅行记忆.png?v=20261025-journey-v8" width="1280" height="2832" loading="lazy" alt="旅行记忆界面"><span>旅行记忆 ↗</span></button>
+          <button type="button" class="memory-shot memory-small memory-expense" data-lightbox="assets/花费记账.png|旅行花费|按类别记录旅行中的支出。"><img src="assets/花费记账.png?v=20261025-journey-v8" width="1280" height="2832" loading="lazy" alt="花费记账界面"><span>花费记录 ↗</span></button>
+          <button type="button" class="memory-shot memory-small memory-note" data-lightbox="assets/备忘录.png|旅行备忘|记录提醒并跟踪完成状态。"><img src="assets/备忘录.png?v=20261025-journey-v8" width="1280" height="2832" loading="lazy" alt="枢游记新版旅行备忘录编辑界面"><span>旅行备忘 ↗</span></button>
         </div>
       </div>
     </section>
 
     <section class="devices-section section-pad" id="devices" aria-labelledby="devicesTitle">
       <div class="container">
-        <div class="section-index"><span>第五章</span><span>ONE EXPERIENCE · TWO SCREENS</span></div>
+        <div class="section-index"><span>第五章</span><span>CURRENT MOBILE SCREEN</span></div>
         <div class="split-heading">
-          <h2 id="devicesTitle">同一段旅程，<br>适应不同的屏幕。</h2>
-          <p>手机端以底部导航完成轻量操作，平板端以侧边栏承载更宽的信息结构。点击切换，直接看同一功能在两种设备上的真实界面。</p>
+          <h2 id="devicesTitle">新版手机界面，<br>完整呈现每一步。</h2>
+          <p>这里展示从当前应用重新截取的完整手机端界面。为避免把旧版本误作新版，未取得新版平板实机截图前不再放入旧版平板画面。</p>
         </div>
         <div class="device-demo">
-          <div class="device-switch" role="tablist" aria-label="设备界面">
-            <button type="button" role="tab" aria-selected="true" data-device="phone">手机端</button>
-            <button type="button" role="tab" aria-selected="false" data-device="tablet">平板端</button>
-          </div>
           <div class="device-screen phone-view" id="deviceScreen" role="tabpanel">
-            <img id="deviceImage" src="assets/手机端主页.png" width="468" height="1015" loading="lazy" alt="枢游记手机端主页">
+            <img id="deviceImage" src="assets/手机端主页.png?v=20261025-journey-v8" width="1280" height="2832" loading="lazy" alt="枢游记新版手机端主页，展示照片上传与文化知识入口">
           </div>
-          <div class="device-comment"><span>界面观察</span><p id="deviceDescription">手机端以底部导航保持常用入口易触达，围绕修复与知识能力组织当前页面。</p><button type="button" class="inline-button" id="deviceZoom">查看完整截图 ↗</button></div>
+          <div class="device-comment"><span>新版手机端 · 完整实机界面</span><p id="deviceDescription">上传照片、进入文化知识和底部常用导航都在同一张当前版本截图中。图片按原始比例完整缩放，点击可查看原始尺寸。</p><button type="button" class="inline-button" id="deviceZoom">放大查看原图 ↗</button></div>
         </div>
       </div>
     </section>
@@ -249,7 +234,7 @@
           <div class="proof-row"><span class="proof-status status-verified">已验证</span><h3>应用基础流程</h3><p>本机模拟器中的安装与启动、旅行记忆创建入口、语音权限和识别引擎启动已有验证记录。</p></div>
           <div class="proof-row"><span class="proof-status status-built">已实现</span><h3>核心功能与服务</h3><p>影像修复、旅行计划、记忆、花费、智能体、日志恢复以及账号同步等模块进入工程。同步服务与 AI 解析有自动化测试。</p></div>
         </div>
-        <div class="proof-footer"><strong>一段更清楚、更完整、能够继续的旅行。</strong><div><button type="button" class="button button-dark" id="presenterOpenBottom">打开演讲模式</button><a href="枢游记_10分钟答辩演讲稿.md" class="download-link">阅读完整讲稿 ↗</a></div></div>
+        <div class="proof-footer"><strong>一段更清楚、更完整、能够继续的旅行。</strong><div><button type="button" class="button button-dark" id="presenterOpenBottom">打开演讲模式</button><a href="枢游记_10分钟答辩演讲稿.txt" class="download-link">阅读完整讲稿 ↗</a></div></div>
       </div>
     </section>
   </main>
@@ -264,14 +249,14 @@
     <p class="presenter-help">点章节跳转页面。这里是现场提示，完整逐字稿可单独打开。</p>
     <div class="presenter-list" id="presenterList">
       <button type="button" data-present="top"><span>00:00–01:00</span><strong>开场 · 旅行碎片</strong><small>用照片、故事、状态丢失三个问题切入</small></button>
-      <button type="button" data-present="journey"><span>01:00–02:30</span><strong>产品主线 · 四个时刻</strong><small>逐一点击标签，展示对应时刻与真实界面</small></button>
-      <button type="button" data-present="repair"><span>02:30–04:15</span><strong>影像修复 · 三种选择</strong><small>依次点击去雾、清晰化、手动编辑</small></button>
-      <button type="button" data-present="intelligence"><span>04:15–05:45</span><strong>智能探索 · 知识与对话</strong><small>切换问文化、看图片和续写记忆</small></button>
+      <button type="button" data-present="journey"><span>01:00–02:30</span><strong>产品主线 · 四个时刻</strong><small>向下滚动，依次展示四段旅程与完整界面</small></button>
+      <button type="button" data-present="repair"><span>02:30–04:15</span><strong>影像修复 · 新版界面</strong><small>展示新版修复首页与手动编辑</small></button>
+      <button type="button" data-present="intelligence"><span>04:15–05:45</span><strong>智能探索 · 知识与对话</strong><small>切换知识入口、对话、计划和记忆页面</small></button>
       <button type="button" data-present="memory"><span>05:45–07:10</span><strong>旅行记忆 · 把片段连起来</strong><small>结合花费、备忘和状态恢复讲述</small></button>
-      <button type="button" data-present="devices"><span>07:10–08:05</span><strong>双端适配 · 手机与平板</strong><small>切换设备截图，说明布局变化</small></button>
-      <button type="button" data-present="proof"><span>08:05–10:00</span><strong>验证边界与收束</strong><small>区分已验证、已实现和仍需条件</small></button>
+      <button type="button" data-present="devices"><span>07:10–08:10</span><strong>多端适配 · 新版手机界面</strong><small>说明手机与平板布局分支，再查看手机完整截图</small></button>
+      <button type="button" data-present="proof"><span>08:10–10:00</span><strong>验证边界与收束</strong><small>区分已验证、已实现和仍需条件</small></button>
     </div>
-    <a class="presenter-script" href="枢游记_10分钟答辩演讲稿.md" target="_blank" rel="noopener">打开完整逐字稿 ↗</a>
+    <a class="presenter-script" href="枢游记_10分钟答辩演讲稿.txt" target="_blank" rel="noopener">打开完整逐字稿 ↗</a>
   </dialog>
 </body>
 </html>

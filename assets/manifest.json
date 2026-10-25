@@ -24,25 +24,22 @@
     "promptNotes": "Generated as companion compositions matching the reference's painterly pixel-art landscape style; no text, logos, people, or product UI. Converted to WebP for local delivery."
   },
   "productScreenshots": {
-    "type": "existing project screenshots",
-    "source": "C:/Users/36712/Desktop/123123/imgFix",
+    "type": "Direct screenshots of current native app screens",
+    "source": "C:/Users/36712/Desktop/123123/imgFix/entry/build/default/outputs/default/entry-default-unsigned.hap",
     "filesUsed": [
-      "软件图标.png",
+      "枢游记-app-icon.jpg",
       "手机端主页.png",
-      "平板端主页.png",
       "旅行计划.png",
-      "去雾.png",
-      "图像清晰化.png",
       "手动修图页面.png",
       "文化知识获取_智能体.png",
-      "智能客服发送图片.png",
-      "智能客服_指令模式.png",
-      "续写2.png",
+      "智能客服_新版对话.png",
       "旅行记忆.png",
       "花费记账.png",
-      "备忘录.png",
-      "服务卡片.png"
+      "备忘录.png"
     ],
-    "usage": "feature evidence and fullscreen previews; not generated or redrawn"
+    "usage": "current app evidence and fullscreen previews; not generated or redrawn",
+    "refreshedOn": "2026-10-25",
+    "captureDevice": "Mate 90 Pro emulator, HarmonyOS 7.0.0, 1280x2832",
+    "notes": "上述页面图均从当前 HAP 运行画面直接截取；手动编辑界面使用项目风景样片。再次核对后确认，HAP 的去雾与图像增强仍通过 entry/src/main/resources/rawfile/phone.html 和 index.html 打开较早的蓝色 WebView 页面，故网页已撤下去雾.png、图像清晰化.png 两张旧界面图，并改为展示当前原生修复首页和手动编辑界面；旧文件保留在素材目录但网页不再引用。新版详情页面截图需要应用本身完成相应重构后再补。新版平板实机图缺失，因此仍不展示旧平板图。"
   }
 }

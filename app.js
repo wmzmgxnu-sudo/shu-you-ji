@@ -3,6 +3,8 @@
 
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+  const assetUrl = path => `${path}${path.includes('?') ? '&' : '?'}v=20261025-journey-v8`;
+  const productImage = name => assetUrl(`assets/${name}`);
   const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const scrollBehavior = motionOK ? 'smooth' : 'auto';
 
@@ -23,90 +25,50 @@
     if (event.key === 'Escape') closeMenu();
   });
 
-  const scenes = {
-    before: { kicker: '01 / 出发前', title: '先把未知变成计划', image: '旅行计划.png', alt: '枢游记旅行计划界面', count: '01 / 04' },
-    during: { kicker: '02 / 旅行中', title: '把注意力留给现场', image: '去雾.png', alt: '枢游记去雾结果界面', count: '02 / 04' },
-    after: { kicker: '03 / 回家后', title: '让照片重新讲述故事', image: '旅行记忆.png', alt: '枢游记旅行记忆界面', count: '03 / 04' },
-    continuity: { kicker: '04 / 下一次打开', title: '让一段旅程持续生长', image: '服务卡片.png', alt: '枢游记服务卡片界面', count: '04 / 04' }
-  };
-  let activeScene = 'before';
-  let sceneSwap = 0;
-  const stageImage = $('#stageImage');
   const journeyChapters = $$('.journey-chapter');
-  const journeyTabs = $$('[data-jump]');
-  function syncJourneyState() {
-    journeyChapters.forEach(chapter => {
-      const selected = chapter.dataset.scene === activeScene;
-      chapter.hidden = !selected;
-      chapter.classList.toggle('is-active', selected);
-    });
-    journeyTabs.forEach(button => {
-      const selected = button.dataset.jump === activeScene;
-      button.classList.toggle('is-active', selected);
-      button.setAttribute('aria-selected', String(selected));
-      button.tabIndex = selected ? 0 : -1;
+  const journeyLinks = $$('[data-journey-link]');
+  let journeyFrame = null;
+  function syncJourneyLinks() {
+    journeyFrame = null;
+    const section = $('#journey').getBoundingClientRect();
+    if (section.bottom <= 0 || section.top >= window.innerHeight) return;
+    const focusLine = window.innerHeight * .55;
+    const current = journeyChapters.reduce((closest, chapter) => {
+      const bounds = chapter.getBoundingClientRect();
+      const distance = Math.abs((bounds.top + bounds.bottom) / 2 - focusLine);
+      return distance < closest.distance ? { chapter, distance } : closest;
+    }, { chapter: journeyChapters[0], distance: Infinity }).chapter;
+    journeyLinks.forEach(link => {
+      const selected = link.dataset.journeyLink === current.dataset.scene;
+      link.classList.toggle('is-current', selected);
+      if (selected) link.setAttribute('aria-current', 'step');
+      else link.removeAttribute('aria-current');
     });
   }
-  syncJourneyState();
-  function setScene(key) {
-    if (!scenes[key] || key === activeScene) return;
-    activeScene = key;
-    const data = scenes[key];
-    const ticket = ++sceneSwap;
-    syncJourneyState();
-    stageImage.classList.add('is-changing');
-    $('#stageKicker').textContent = data.kicker;
-    $('#stageTitle').textContent = data.title;
-    $('#stageCount').textContent = data.count;
-    window.setTimeout(() => {
-      if (ticket !== sceneSwap) return;
-      stageImage.src = `assets/${data.image}`;
-      stageImage.alt = data.alt;
-      if (!motionOK) stageImage.classList.remove('is-changing');
-      else stageImage.decode().catch(() => {}).finally(() => {
-        if (ticket === sceneSwap) stageImage.classList.remove('is-changing');
-      });
-    }, motionOK ? 180 : 0);
-  }
-  journeyTabs.forEach((button, index) => {
-    button.addEventListener('click', () => setScene(button.dataset.jump));
-    button.addEventListener('keydown', event => {
-      let nextIndex = index;
-      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = (index + 1) % journeyTabs.length;
-      else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = (index - 1 + journeyTabs.length) % journeyTabs.length;
-      else if (event.key === 'Home') nextIndex = 0;
-      else if (event.key === 'End') nextIndex = journeyTabs.length - 1;
-      else return;
-      event.preventDefault();
-      journeyTabs[nextIndex].focus();
-      setScene(journeyTabs[nextIndex].dataset.jump);
-    });
-  });
+  window.addEventListener('scroll', () => {
+    if (journeyFrame === null) journeyFrame = window.requestAnimationFrame(syncJourneyLinks);
+    scheduleNavSync();
+  }, { passive: true });
+  window.addEventListener('resize', syncJourneyLinks, { passive: true });
+  syncJourneyLinks();
 
   const repairs = {
-    dehaze: {
-      image: '去雾.png', alt: '枢游记图像去雾原图与结果对照界面', index: '01 / DEHAZE',
-      heading: '让雾气退后，\n让画面走近。',
-      text: '基于暗通道先验的去雾处理放在 WebView 工作流中，提供参数调节与修复前后查看。用户可以先使用默认值，再根据照片情况微调。',
-      facts: [['处理方式', '暗通道先验与图像增强'], ['交互特点', '默认参数、手动调节、前后查看'], ['使用场景', '山景、远景与雾天旅行照片']],
-      title: '图像去雾'
-    },
-    upscale: {
-      image: '图像清晰化.png', alt: '枢游记图像清晰化界面', index: '02 / UPSCALE',
-      heading: '细节丢了，\n试着找回来。',
-      text: '清晰化提供 4 倍超分辨率处理入口。Real-ESRGAN 推理依赖本地 Python 服务，因此展示时需说明模型服务的运行环境。',
-      facts: [['处理方式', 'Real-ESRGAN 4× 超分辨率'], ['交互特点', '上传、等待、结果查看'], ['运行条件', '需连接本地 Python 推理服务']],
-      title: '图像清晰化'
+    entry: {
+      image: '手机端主页.png', width: 1280, height: 2832, alt: '枢游记当前原生修复首页，提供照片上传、去雾与增强入口', index: '01 / CURRENT APP',
+      heading: '从新版修复首页，\n进入需要的工具。',
+      text: '这张截图来自当前应用的原生首页，展示照片上传入口与去雾、增强、上色能力。它不冒充旧版嵌入页面的操作截图。',
+      facts: [['当前画面', '新版原生修复首页'], ['功能入口', '上传照片后选择修复工具'], ['图片显示', '完整原图比例，可点击放大']],
+      title: '新版修复首页'
     },
     edit: {
-      image: '手动修图页面.png', alt: '枢游记手动修图界面', index: '03 / MANUAL EDIT',
+      image: '手动修图页面.png', width: 1280, height: 2832, alt: '枢游记手动修图界面', index: '03 / MANUAL EDIT',
       heading: '自动之外，\n也保留人的判断。',
       text: '手动编辑为用户提供自主调节空间。自动处理负责起点，而画面的最终表达仍由使用者决定。',
       facts: [['处理方式', '手动参数与可视化调整'], ['交互特点', '边看边调、即时反馈'], ['使用场景', '需要个人审美判断的照片']],
       title: '手动修图'
     }
   };
-  let activeRepair = 'dehaze';
+  let activeRepair = 'entry';
   let repairSwap = 0;
   function setRepair(key) {
     const data = repairs[key];
@@ -131,7 +93,9 @@
     $('#repairZoom').setAttribute('aria-label', `放大查看${data.title}界面`);
     window.setTimeout(() => {
       if (ticket !== repairSwap) return;
-      image.src = `assets/${data.image}`;
+      image.width = data.width;
+      image.height = data.height;
+      image.src = productImage(data.image);
       image.alt = data.alt;
       image.decode().catch(() => {}).finally(() => {
         if (ticket === repairSwap) image.classList.remove('is-changing');
@@ -141,10 +105,10 @@
   $$('[data-repair]').forEach(button => button.addEventListener('click', () => setRepair(button.dataset.repair)));
 
   const aiCases = {
-    culture: { image: '文化知识获取_智能体.png', alt: '枢游记文化知识智能体界面', label: '文化探索 / 智能体模式', title: '从“这是什么”到“它为什么值得看”', description: '本地知识库提供结构化的目的地信息，智能体允许用户围绕同一处景点继续提问。内容从“查到”走向“理解”。', source: 'KnowledgeBase · KgService · AiService', zoom: '文化知识智能体' },
-    photo: { image: '智能客服发送图片.png', alt: '枢游记智能客服发送图片界面', label: '图片理解 / 两阶段处理', title: '从画面出发，给问题一个有依据的入口', description: '先用视觉服务分析图片，再把识别结果与提问组织给语言服务。这个过程让“看图提问”具备明确的数据流。', source: 'VisionService → AiService', zoom: '图片提问' },
-    command: { image: '智能客服_指令模式.png', alt: '枢游记智能客服指令模式界面', label: '自然语言 / 指令模式', title: '把一句话拆成可执行的旅行意图', description: '指令模式解析用户的旅行表达，并将结果映射到计划等应用能力。解析逻辑已有自动化测试，仍应以实际演示范围为准。', source: 'AiCommandParser · TravelPlan', zoom: '智能指令模式' },
-    writing: { image: '续写2.png', alt: '枢游记旅行记忆续写界面', label: '旅行日记 / 续写辅助', title: '当记忆有画面，文字也可以接着走', description: '在日记里选中已有文字后，智能续写提供表达建议。它是辅助创作，不替代用户真实的旅行感受。', source: 'MemoryEditor · AiService', zoom: '日记续写' }
+    culture: { image: '文化知识获取_智能体.png', width: 1280, height: 2832, alt: '新版枢游记知识页，展示新手引导与功能介绍', label: '知识页 / 新手引导入口', title: '先了解工具，再继续探索目的地', description: '新版知识页提供核心功能介绍与可重新打开的新手引导入口。本图呈现知识页当前状态；目的地问答由智能体模式承载，可围绕景点继续深入提问。', source: 'Knowledge Page · User Guide · Agent Mode', zoom: '新版知识页与新手引导' },
+    photo: { image: '智能客服_新版对话.png', width: 1280, height: 2832, alt: '新版枢游记智能客服对话界面与旅行计划快捷入口', label: '智能助手 / 对话与快捷入口', title: '从一段对话开始，找到合适的旅行工具', description: '这是从当前应用重新截取的智能客服对话界面，展示欢迎说明和旅行计划快捷入口。截图不展示图片识别结果；图片上传入口在修复首页。', source: 'Assistant Chat · Plan Shortcut', zoom: '新版智能客服对话界面' },
+    command: { image: '旅行计划.png', width: 1280, height: 2832, alt: '新版枢游记旅行计划列表与计划详情', label: '旅行计划 / 行程管理', title: '把旅行安排放进一张可继续编辑的计划里', description: '当前应用的旅行计划页展示行程状态、日期、备忘和编辑入口。智能客服提供计划模板快捷入口；计划详情以这张新版界面为准。', source: 'TravelPlan · Notes · Expense Entry', zoom: '新版旅行计划页面' },
+    writing: { image: '旅行记忆.png', width: 1280, height: 2832, alt: '新版枢游记旅行记忆首页，展示新建记忆与照片地图入口', label: '旅行记忆 / 新建入口', title: '先把地点、照片和故事收进同一段记忆', description: '新版旅行记忆页展示新建记忆、照片地图和照片成卡入口。本图用于说明记忆的记录入口，不再使用旧版续写截图代替当前界面。', source: 'Travel Memory · Photo Map', zoom: '新版旅行记忆页面' }
   };
   let activeAi = 'culture';
   let aiSwap = 0;
@@ -160,10 +124,13 @@
     $('#aiTitle').textContent = data.title;
     $('#aiDescription').textContent = data.description;
     $('#aiSource').textContent = data.source;
-    $('#aiZoom').setAttribute('aria-label', `放大查看${data.zoom}界面`);
+    $('#aiZoom').setAttribute('aria-label', `放大查看${data.zoom}`);
+    $('#aiZoom').classList.toggle('is-landscape', data.width > data.height);
     window.setTimeout(() => {
       if (ticket !== aiSwap) return;
-      image.src = `assets/${data.image}`;
+      image.width = data.width;
+      image.height = data.height;
+      image.src = productImage(data.image);
       image.alt = data.alt;
       image.decode().catch(() => {}).finally(() => {
         if (ticket === aiSwap) image.classList.remove('is-changing');
@@ -172,40 +139,21 @@
   }
   $$('[data-ai]').forEach(button => button.addEventListener('click', () => setAi(button.dataset.ai)));
 
-  const deviceData = {
-    phone: { image: '手机端主页.png', alt: '枢游记手机端主页', description: '手机端以底部导航保持常用入口易触达，围绕修复与知识能力组织当前页面。', title: '手机端主页' },
-    tablet: { image: '平板端主页.png', alt: '枢游记平板端主页', description: '平板端利用横向空间呈现侧边导航与多列内容；它不是把手机画面简单拉宽。', title: '平板端主页' }
+  const currentDevice = {
+    image: '手机端主页.png', width: 1280, height: 2832,
+    alt: '枢游记新版手机端主页，展示照片上传与文化知识入口',
+    description: '新版手机端首页完整截图：上传照片、进入文化知识和底部常用导航都在同一张实机画面中。',
+    title: '新版手机端主页'
   };
-  let activeDevice = 'phone';
-  let deviceSwap = 0;
-  function setDevice(key) {
-    const data = deviceData[key];
-    if (!data) return;
-    activeDevice = key;
-    const ticket = ++deviceSwap;
-    const image = $('#deviceImage');
-    const screen = $('#deviceScreen');
-    image.classList.add('is-changing');
-    $$('[data-device]').forEach(button => button.setAttribute('aria-selected', String(button.dataset.device === key)));
-    $('#deviceDescription').textContent = data.description;
-    window.setTimeout(() => {
-      if (ticket !== deviceSwap) return;
-      image.src = `assets/${data.image}`;
-      image.alt = data.alt;
-      screen.classList.toggle('phone-view', key === 'phone');
-      screen.classList.toggle('tablet-view', key === 'tablet');
-      image.decode().catch(() => {}).finally(() => {
-        if (ticket === deviceSwap) image.classList.remove('is-changing');
-      });
-    }, motionOK ? 140 : 0);
-  }
-  $$('[data-device]').forEach(button => button.addEventListener('click', () => setDevice(button.dataset.device)));
 
   // Native dialog preserves keyboard focus and gives a full-size, uncropped source image.
   const lightbox = $('#lightbox');
-  function showLightbox(src, title, description, alt) {
-    $('#lightboxImage').src = src;
-    $('#lightboxImage').alt = alt || title;
+  function showLightbox(src, title, description, alt, width = 480, height = 1017) {
+    const lightboxImage = $('#lightboxImage');
+    lightboxImage.width = width > 0 ? width : 480;
+    lightboxImage.height = height > 0 ? height : 1017;
+    lightboxImage.src = assetUrl(src);
+    lightboxImage.alt = alt || title;
     $('#lightboxTitle').textContent = title;
     $('#lightboxDescription').textContent = description || '';
     lightbox.showModal();
@@ -213,19 +161,20 @@
   }
   $('#repairZoom').addEventListener('click', () => {
     const data = repairs[activeRepair];
-    showLightbox(`assets/${data.image}`, data.title, data.text, data.alt);
+    showLightbox(`assets/${data.image}`, data.title, data.text, data.alt, data.width, data.height);
   });
   $('#aiZoom').addEventListener('click', () => {
     const data = aiCases[activeAi];
-    showLightbox(`assets/${data.image}`, data.zoom, data.description, data.alt);
+    showLightbox(`assets/${data.image}`, data.zoom, data.description, data.alt, data.width, data.height);
   });
   $('#deviceZoom').addEventListener('click', () => {
-    const data = deviceData[activeDevice];
-    showLightbox(`assets/${data.image}`, data.title, data.description, data.alt);
+    const data = currentDevice;
+    showLightbox(`assets/${data.image}`, data.title, data.description, data.alt, data.width, data.height);
   });
   $$('[data-lightbox]').forEach(button => button.addEventListener('click', () => {
     const [src, title, description] = button.dataset.lightbox.split('|');
-    showLightbox(src, title, description, $('img', button).alt);
+    const image = $('img', button);
+    showLightbox(src, title, description, image.alt, image.naturalWidth, image.naturalHeight);
   }));
   $('#lightboxClose').addEventListener('click', () => lightbox.close());
   lightbox.addEventListener('click', event => { if (event.target === lightbox) lightbox.close(); });
@@ -284,7 +233,14 @@
     });
     const selected = navLinks.find(link => link.hash === `#${currentSection?.id}`);
     navLinks.forEach(link => link.classList.toggle('is-current', link === selected));
-    const currentHash = currentSection?.id && currentSection.id !== 'top' ? `#${currentSection.id}` : '';
+    let currentHash = currentSection?.id && currentSection.id !== 'top' ? `#${currentSection.id}` : '';
+    if (currentSection?.id === 'journey') {
+      const currentChapter = journeyChapters.find(chapter => {
+        const bounds = chapter.getBoundingClientRect();
+        return bounds.top <= activationLine && bounds.bottom > activationLine;
+      });
+      if (currentChapter) currentHash = `#${currentChapter.id}`;
+    }
     if (window.location.hash !== currentHash) {
       window.history.replaceState(window.history.state, '', `${window.location.pathname}${window.location.search}${currentHash}`);
     }
