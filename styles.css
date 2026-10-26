@@ -289,7 +289,6 @@ dialog::backdrop{background:rgba(5,19,19,.78);backdrop-filter:blur(5px)}
 .presenter-list button span{grid-row:span 2;color:var(--jade);font-size:11px;font-weight:800;padding-top:4px}
 .presenter-list strong{font-size:14px}
 .presenter-list small{color:var(--muted);font-size:11px}
-.presenter-script{display:block;margin:25px 28px 30px;padding:15px;background:var(--pine);color:#f8faf4;text-align:center;border-radius:6px;font-size:13px;font-weight:700}
 
 @media(max-width:1120px){
   .container{width:min(100% - 48px,1600px)}
