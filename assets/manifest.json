@@ -35,11 +35,12 @@
       "智能客服_新版对话.png",
       "旅行记忆.png",
       "花费记账.png",
-      "备忘录.png"
+      "备忘录.png",
+      "平板端模拟器截图_20261026.jpeg"
     ],
     "usage": "current app evidence and fullscreen previews; not generated or redrawn",
-    "refreshedOn": "2026-10-25",
-    "captureDevice": "Mate 90 Pro emulator, HarmonyOS 7.0.0, 1280x2832",
-    "notes": "上述页面图均从当前 HAP 运行画面直接截取；手动编辑界面使用项目风景样片。再次核对后确认，HAP 的去雾与图像增强仍通过 entry/src/main/resources/rawfile/phone.html 和 index.html 打开较早的蓝色 WebView 页面，故网页已撤下去雾.png、图像清晰化.png 两张旧界面图，并改为展示当前原生修复首页和手动编辑界面；旧文件保留在素材目录但网页不再引用。新版详情页面截图需要应用本身完成相应重构后再补。新版平板实机图缺失，因此仍不展示旧平板图。"
+    "refreshedOn": "2026-10-26",
+    "captureDevice": "Mate 90 Pro emulator for phone screens; MatePad Pro 13 emulator for tablet screen",
+    "notes": "手机端页面图从当前 HAP 运行画面直接截取；平板端截图于 2026-10-26 从 MatePad Pro 13 模拟器显示器完整截取，分辨率 3120×2080，包含新版修复首页与文化知识入口，按原比例展示。手动编辑界面使用项目风景样片。再次核对后确认，HAP 的去雾与图像增强仍通过 entry/src/main/resources/rawfile/phone.html 和 index.html 打开较早的蓝色 WebView 页面，故网页已撤下去雾.png、图像清晰化.png 两张旧界面图；旧文件保留在素材目录但网页不再引用。"
   }
 }

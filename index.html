@@ -146,13 +146,16 @@
         <div class="repair-workbench">
           <div class="repair-nav" role="tablist" aria-label="影像修复方式">
             <button type="button" role="tab" aria-selected="true" data-repair="entry"><span>01</span><strong>新版修复首页</strong><small>当前应用的照片处理入口</small></button>
-            <button type="button" role="tab" aria-selected="false" data-repair="edit"><span>02</span><strong>手动编辑</strong><small>保留即时调整与个人判断</small></button>
+            <button type="button" role="tab" aria-selected="false" data-repair="dehaze"><span>02</span><strong>去雾</strong><small>本地 WebView 处理 · 无需 API</small></button>
+            <button type="button" role="tab" aria-selected="false" data-repair="enhance"><span>03</span><strong>AI 清晰化</strong><small>4× 超分 · 需要后端 API</small></button>
+            <button type="button" role="tab" aria-selected="false" data-repair="edit"><span>04</span><strong>手动编辑</strong><small>保留即时调整与个人判断</small></button>
           </div>
           <div class="repair-preview" id="repairPanel" role="tabpanel">
             <button class="image-zoom" type="button" id="repairZoom" aria-label="放大查看新版修复首页">
               <img id="repairImage" src="assets/手机端主页.png?v=20261025-journey-v8" width="1280" height="2832" loading="lazy" alt="枢游记当前原生修复首页，含照片上传与去雾、增强入口">
               <span>点击查看完整界面 ↗</span>
             </button>
+            <div class="repair-process" id="repairProcess" hidden aria-live="polite"></div>
           </div>
           <div class="repair-description">
             <span class="detail-index" id="repairIndex">01 / CURRENT APP</span>
@@ -161,7 +164,6 @@
             <dl id="repairFacts"><div><dt>当前画面</dt><dd>新版原生修复首页</dd></div><div><dt>功能入口</dt><dd>上传照片后选择修复工具</dd></div><div><dt>图片显示</dt><dd>完整原图比例，可点击放大</dd></div></dl>
           </div>
         </div>
-        <p class="repair-note">已核对当前 HAP：去雾与图像增强仍打开较早的嵌入页面，尚无重构后的新版详情截图，因此本页不再展示旧版截图；当前原生修复入口和手动编辑界面均来自新版应用。</p>
       </div>
     </section>
 
@@ -174,7 +176,7 @@
         </div>
         <div class="intelligence-layout">
           <div class="ai-selector" role="tablist" aria-label="智能服务场景">
-            <button type="button" role="tab" aria-selected="true" data-ai="culture"><b>01</b><span>知识入口<small>功能介绍与新手引导</small></span></button>
+            <button type="button" role="tab" aria-selected="true" data-ai="culture"><b>01</b><span>文化知识<small>本地资料 + AI 追问</small></span></button>
             <button type="button" role="tab" aria-selected="false" data-ai="photo"><b>02</b><span>智能对话<small>欢迎信息与快捷入口</small></span></button>
             <button type="button" role="tab" aria-selected="false" data-ai="command"><b>03</b><span>旅行计划<small>查看和管理行程</small></span></button>
             <button type="button" role="tab" aria-selected="false" data-ai="writing"><b>04</b><span>旅行记忆<small>新建记忆与照片地图</small></span></button>
@@ -185,7 +187,7 @@
               <img id="aiImage" src="assets/文化知识获取_智能体.png?v=20261025-journey-v8" width="1280" height="2832" loading="lazy" alt="新版枢游记知识页，展示新手引导与功能介绍">
             </button>
           </div>
-          <aside class="ai-context"><p id="aiDescription">新版知识页提供核心功能介绍与可重新打开的新手引导入口。本图呈现知识页当前状态；目的地问答由智能体模式承载，可围绕景点继续深入提问。</p><div class="ai-source"><span>能力来源</span><strong id="aiSource">Knowledge Page · User Guide · Agent Mode</strong></div></aside>
+          <aside class="ai-context"><p id="aiDescription">新版知识页提供核心功能介绍与可重新打开的新手引导入口。本图呈现知识页当前状态；目的地问答由智能体模式承载，可围绕景点继续深入提问。</p><div class="ai-source"><span>文化知识获取</span><div class="knowledge-modes"><div><b>本地资料库</b><small>已有景区文化内容，可直接展示</small><em>无需 API</em></div><div><b>AI 智能体追问</b><small>模型生成回答与连续对话</small><em>需要网络与模型 API</em></div></div><strong id="aiSource">Knowledge Page · User Guide · Agent Mode</strong></div></aside>
         </div>
       </div>
     </section>
@@ -212,16 +214,16 @@
 
     <section class="devices-section section-pad" id="devices" aria-labelledby="devicesTitle">
       <div class="container">
-        <div class="section-index"><span>第五章</span><span>CURRENT MOBILE SCREEN</span></div>
+        <div class="section-index"><span>第五章</span><span>PHONE & TABLET</span></div>
         <div class="split-heading">
-          <h2 id="devicesTitle">新版手机界面，<br>完整呈现每一步。</h2>
-          <p>这里展示从当前应用重新截取的完整手机端界面。为避免把旧版本误作新版，未取得新版平板实机截图前不再放入旧版平板画面。</p>
+          <h2 id="devicesTitle">同一段旅程，<br>适配不同的屏幕。</h2>
+          <p>切换查看手机与 MatePad Pro 13 模拟器中的新版应用画面。截图按原比例完整展示，点击可放大查看。</p>
         </div>
         <div class="device-demo">
-          <div class="device-screen phone-view" id="deviceScreen" role="tabpanel">
+          <div class="device-screen phone-view" id="deviceScreen" role="tabpanel" aria-label="手机端完整截图">
             <img id="deviceImage" src="assets/手机端主页.png?v=20261025-journey-v8" width="1280" height="2832" loading="lazy" alt="枢游记新版手机端主页，展示照片上传与文化知识入口">
           </div>
-          <div class="device-comment"><span>新版手机端 · 完整实机界面</span><p id="deviceDescription">上传照片、进入文化知识和底部常用导航都在同一张当前版本截图中。图片按原始比例完整缩放，点击可查看原始尺寸。</p><button type="button" class="inline-button" id="deviceZoom">放大查看原图 ↗</button></div>
+          <div class="device-comment"><div class="device-choice" role="tablist" aria-label="选择设备布局"><button type="button" role="tab" aria-selected="true" data-device="phone">手机端</button><button type="button" role="tab" aria-selected="false" data-device="tablet">平板端</button></div><span id="deviceLabel">新版手机端 · 当前运行截图</span><p id="deviceDescription">上传照片、进入文化知识和底部常用导航都在同一张当前版本截图中。图片按原始比例完整缩放，点击可查看原始尺寸。</p><button type="button" class="inline-button" id="deviceZoom">放大查看原图 ↗</button></div>
         </div>
       </div>
     </section>
@@ -253,7 +255,7 @@
       <button type="button" data-present="repair"><span>02:30–04:15</span><strong>影像修复 · 新版界面</strong><small>展示新版修复首页与手动编辑</small></button>
       <button type="button" data-present="intelligence"><span>04:15–05:45</span><strong>智能探索 · 知识与对话</strong><small>切换知识入口、对话、计划和记忆页面</small></button>
       <button type="button" data-present="memory"><span>05:45–07:10</span><strong>旅行记忆 · 把片段连起来</strong><small>结合花费、备忘和状态恢复讲述</small></button>
-      <button type="button" data-present="devices"><span>07:10–08:10</span><strong>多端适配 · 新版手机界面</strong><small>说明手机与平板布局分支，再查看手机完整截图</small></button>
+      <button type="button" data-present="devices"><span>07:10–08:10</span><strong>多端适配 · 手机与平板画面</strong><small>展示 MatePad Pro 13 模拟器截图并查看完整原图</small></button>
       <button type="button" data-present="proof"><span>08:10–10:00</span><strong>验证边界与收束</strong><small>区分已验证、已实现和仍需条件</small></button>
     </div>
     <a class="presenter-script" href="枢游记_10分钟答辩演讲稿.txt" target="_blank" rel="noopener">打开完整逐字稿 ↗</a>
