@@ -12,8 +12,8 @@
   <link rel="preload" as="image" href="assets/山水旅程-hero.png">
   <link rel="stylesheet" href="styles.css?v=20261025-journey-v8">
   <link rel="stylesheet" href="live.css?v=20261115-trip-flow">
-  <link rel="stylesheet" href="presentation-fix.css?v=20261115-fanjing">
-  <script src="app.js?v=20261115-fanjing" defer></script>
+  <link rel="stylesheet" href="presentation-fix.css?v=20261115-ai-landscapes">
+  <script src="app.js?v=20261115-story-proof" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
@@ -223,12 +223,33 @@
           <figure class="comparison-panel"><img src="assets/journey_original.jpg" width="1672" height="941" loading="lazy" alt="应用内置山路旅行场景原图，山谷有自然云雾"><figcaption><b>02 原图</b><span>应用内置旅行照片 · 未处理</span></figcaption></figure>
         </div>
         </div>
-        <div class="showcase-slide live-slide-stories" id="ai-story-proof">
-        <div class="slide-heading"><span>AI 实测 / 02</span><h2>一次修图，一段真实的旅行记录。</h2><p>左侧对比图像模型返回；右侧直接阅读旅行 AI 在应用中的文字。</p></div>
-        <div class="live-lead-grid">
-          <article class="live-hero-card"><div class="live-card-copy"><span>01 / 今日助手</span><h3>下一站是计划，<br>眼前所见是经历。</h3><p>测试输入写明“计划 9 点去明孝陵”，同时记录沿钟山石阶行走与午餐 48 元。今日助手把待完成与已发生的事分开回答。</p><div class="live-tags"><span>实际行程</span><span>计划状态</span><span>明确来源</span></div></div><button class="live-shot" type="button" data-lightbox="assets/ai_scenario_retest_lower.jpeg|今日助手真实返回|应用内今日助手与旅程整理员的实测返回"><img src="assets/ai_scenario_retest_lower.jpeg" width="1280" height="2832" loading="lazy" alt="今日助手与旅程整理员的应用实测返回"><span>放大阅读真实返回 ↗</span></button></article>
-          <article class="live-text-card"><span>02 / AI 旅程整理员</span><h3>把计划与经历分开写。</h3><p>实测输入包括“计划 9 点去明孝陵”“沿钟山石阶走了一段”“午餐 48 元”。返回区分了尚未确认到访的计划与已经发生的见闻，也没有把非票据图片误识别为消费。</p><blockquote>“计划中有明孝陵，但尚未确认是否已到访。已发生的事是沿钟山石阶走了一段，看到树叶变黄。”</blockquote><button class="live-shot live-shot-text" type="button" data-lightbox="assets/ai_scenario_retest_lower.jpeg|旅行 AI 场景真实返回|今日助手、照片故事、旅程整理员与非票据防误识别"><img src="assets/ai_scenario_retest_lower.jpeg" width="1280" height="2832" loading="lazy" alt="旅行 AI 场景中四项实际文字返回的应用截图"><span>阅读完整返回 ↗</span></button></article>
-        </div>
+        <div class="showcase-slide story-proof" id="ai-story-proof" aria-labelledby="storyProofTitle">
+          <div class="slide-heading">
+            <span>AI 实测 / 02</span>
+            <h2 id="storyProofTitle">一次修图，一段真实的旅行记录。</h2>
+            <p>同一组输入，看看今日助手怎么回答，旅程整理员怎么写。</p>
+          </div>
+          <div class="story-proof-grid">
+            <article class="story-proof-card">
+              <h3>给 AI 的三条信息</h3>
+              <dl>
+                <div><dt>计划</dt><dd>早上 9 点去明孝陵。</dd></div>
+                <div><dt>亲历</dt><dd>沿南京钟山的石阶走了一段，看到树叶变黄。</dd></div>
+                <div><dt>支出</dt><dd>午餐 48 元。</dd></div>
+              </dl>
+            </article>
+            <article class="story-proof-card">
+              <h3>应用里的两条真实返回</h3>
+              <h4>今日助手 · 回答下一站</h4>
+              <blockquote>计划中有明孝陵，但尚未确认是否已到访。已发生的事是沿钟山石阶走了一段，看到树叶变黄。</blockquote>
+              <h4>旅程整理员 · 写成旅行日记</h4>
+              <blockquote>原计划今早九点去明孝陵，我实际记下的是沿钟山石阶走了一段，看到树叶变黄。午餐花费四十八元。</blockquote>
+            </article>
+          </div>
+          <div class="story-proof-actions">
+            <p>计划中的景点保留在计划里，亲历和花费写进当天的记录。</p>
+            <button type="button" class="capability-link" data-lightbox="assets/ai_scenario_retest_lower.jpeg|旅行 AI 场景实测|应用内今日助手与旅程整理员的原始返回">查看应用实测截图 ↗</button>
+          </div>
         </div>
       </div>
     </section>
@@ -243,7 +264,7 @@
         </div>
         </div>
         <div class="showcase-slide capability-slide-cards" id="ai-travel-modes">
-        <div class="slide-heading"><span>AI 全景 / 02</span><h2>旅行中的文字 AI。</h2><p>这四项都已在同一次旅行场景中返回，现场可以点开应用截图核对。</p></div>
+        <div class="slide-heading"><span>AI 全景 / 02</span><h2>今日助手、旅程整理、照片故事与票据识别</h2><p>用同一次旅行场景的实际返回，对照四项功能的结果。</p></div>
         <div class="capability-grid">
           <article class="capability-card"><span class="capability-no">02 / 旅程整理 · 已实测</span><h3>只把发生的事写成经历</h3><p>计划去明孝陵，不等于已经到访。整理员将行程、记忆和午餐 48 元组织为第一人称草稿，用户核对后再保存。</p><blockquote>“原计划今早九点去明孝陵，我实际记下的是沿钟山石阶走了一段，看到树叶变黄。午餐花费四十八元。”</blockquote><button class="capability-link" type="button" data-lightbox="assets/ai_scenario_retest_lower.jpeg|旅程整理员实际返回|同一次旅行场景的今日助手、照片故事和旅程整理返回">查看应用内返回 ↗</button></article>
           <article class="capability-card"><span class="capability-no">03 / 今日助手 · 已实测</span><h3>回答下一站，区分计划和完成</h3><p>读取当天行程与记录，回答“下一站在哪里”。在实测中，模型明确说计划中有明孝陵，但尚未确认是否到访。</p><div class="capability-quote">计划中有明孝陵，但尚未确认是否已到访。</div></article>
@@ -252,7 +273,7 @@
         </div>
         </div>
         <div class="showcase-slide capability-slide-cards" id="ai-agent-modes">
-        <div class="slide-heading"><span>AI 全景 / 03</span><h2>从识图到交互入口。</h2><p>以下能力已进入应用工程；界面与真实请求仍以设备端操作为准。</p></div>
+        <div class="slide-heading"><span>AI 全景 / 03</span><h2>景点问答、照片成卡、智能对话与续写</h2><p>看这些功能如何进入应用里的日常操作。</p></div>
         <div class="capability-grid">
           <article class="capability-card"><span class="capability-no">06 / 景点知识与写作 · 已实测</span><h3>遇到不懂的景点继续追问</h3><p>本地景区资料可直接查阅；选择智能体后可以围绕目的地追问。铜仁景区问答已有应用内实测截图。</p><button class="capability-link" type="button" data-lightbox="assets/assistant-fanjing-session.jpeg|梵净山问答实测|AI 旅程助手收到问题后的中文回复">查看铜仁问答 ↗</button></article>
           <article class="capability-card"><span class="capability-no">07 / 照片成卡 · 已接入</span><h3>由照片生成可编辑记忆草稿</h3><p>先用系统相册选照片，再由视觉 AI 提取画面线索并生成文字。应用要求用户核对地点和内容，确认后才保存为旅行记忆。</p><div class="capability-quote">先识图，再写草稿；最后由旅行者确认。</div></article>
@@ -332,6 +353,7 @@
     <div class="presenter-list" id="presenterList">
       <button type="button" data-present="top"><span>00:00–00:40</span><strong>开场 · AI 与鸿蒙旅行</strong><small>从一张照片进入修图与旅程记录</small></button>
       <button type="button" data-present="ai-live"><span>00:40–02:40</span><strong>AI 实测 · 原图与真实返回</strong><small>看去雾、增强、上色和旅程整理员的应用截图</small></button>
+      <button type="button" data-present="ai-story-proof"><span>05:18–06:08</span><strong>AI 实测 02 · 旅行记录</strong><small>对照计划、亲历和支出，看两条应用实测返回</small></button>
       <button type="button" data-present="ai-capabilities"><span>02:40–04:10</span><strong>AI 全景 · 九类能力</strong><small>区分已实测结果与已接入入口</small></button>
       <button type="button" data-present="journey"><span>05:40–07:00</span><strong>旅行主线 · 四个时刻</strong><small>出发前、旅行中、旅行后和长期陪伴</small></button>
       <button type="button" data-present="devices"><span>07:00–08:00</span><strong>多端适配 · 手机与平板</strong><small>查看设备截图与布局</small></button>

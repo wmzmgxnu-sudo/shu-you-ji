@@ -117,3 +117,158 @@
   height:clamp(80px,16vh,145px);
   border-radius:4px;
 }
+
+.ai-flip-visual{
+  background-image:var(--previous-photo, linear-gradient(125deg,#bfd3bf,#e0e9dc));
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:contain;
+}
+
+@media (prefers-reduced-motion:no-preference){
+  html[data-page-turn]{
+    --turn-angle:-13deg;
+    --turn-distance:-4%;
+    --turn-edge:left center;
+  }
+  html[data-page-turn="back"]{
+    --turn-angle:13deg;
+    --turn-distance:4%;
+    --turn-edge:right center;
+  }
+  html[data-page-turn]::view-transition-old(root){
+    z-index:2;
+    transform-origin:var(--turn-edge);
+    box-shadow:0 0 36px rgba(11,36,31,.3);
+    animation:folio-turn 420ms cubic-bezier(.22,.72,.23,1) both;
+  }
+  html[data-page-turn]::view-transition-new(root){
+    animation:folio-arrive 420ms cubic-bezier(.22,.72,.23,1) both;
+  }
+  @keyframes folio-turn{
+    from{transform:perspective(1400px) rotateY(0);opacity:1}
+    to{transform:perspective(1400px) translateX(var(--turn-distance)) rotateY(var(--turn-angle));opacity:0}
+  }
+  @keyframes folio-arrive{
+    from{transform:scale(.987);filter:brightness(.9)}
+    to{transform:scale(1);filter:brightness(1)}
+  }
+}
+
+@media (max-width:800px) and (prefers-reduced-motion:no-preference){
+  html[data-page-turn]::view-transition-old(root){box-shadow:none;animation:folio-fade 230ms ease-out both}
+  html[data-page-turn]::view-transition-new(root){animation:none}
+  @keyframes folio-fade{to{opacity:0}}
+}
+.story-proof-grid{
+  display:grid;
+  grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
+  gap:16px;
+}
+.story-proof-card{
+  padding:clamp(16px,2.1vw,32px);
+  border:1px solid #bfd0c3;
+  border-radius:18px;
+  background:#fbfaf4;
+  color:#173b32;
+}
+.story-proof-card h3{margin:0 0 14px;font-size:clamp(19px,2vw,28px)}
+.story-proof-card dl,.story-proof-card dd{margin:0}
+.story-proof-card dl div{
+  display:grid;
+  grid-template-columns:4em 1fr;
+  gap:8px;
+  padding:12px 0;
+  border-bottom:1px solid #dbe5da;
+}
+.story-proof-card dt,.story-proof-card h4{font-weight:750;color:#24634c}
+.story-proof-card h4{margin:12px 0 5px;font-size:14px}
+.story-proof-card blockquote{
+  margin:0;
+  padding:9px 12px;
+  border-left:3px solid #709b79;
+  background:#edf3e9;
+  line-height:1.55;
+}
+.story-proof-actions{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:12px;
+}
+.story-proof-actions p{margin:0;color:#35554a}
+.story-proof-actions .capability-link{
+  margin:0;
+  border-color:#174f40;
+  background:#174f40;
+  color:#fffefa;
+  cursor:zoom-in;
+}
+.story-proof-actions .capability-link:hover{background:#236650}
+@media(min-width:801px){
+  /* The outer sections must grow with their slides and cannot compete for snap points. */
+  #main>section.live-section,
+  #main>section.capability-section{
+    height:auto;
+    min-height:0;
+    padding:0;
+    display:block;
+    /* Clipping must not make the section a separate scroll container. */
+    overflow:clip;
+    scroll-snap-align:none;
+    scroll-snap-stop:normal;
+  }
+  .story-proof.showcase-slide,
+  .capability-section .capability-slide-cards{
+    height:auto;
+    min-height:calc(100dvh - var(--header));
+  }
+  .capability-section .capability-slide-cards .capability-card{
+    height:auto;
+    min-height:min(26dvh,190px);
+  }
+  .capability-slide-first .capability-card.featured{
+    height:auto;
+    min-height:0;
+  }
+  .capability-slide-first .ai-flip-visual{
+    height:clamp(200px,43dvh,430px);
+  }
+}
+@media(max-width:800px){
+  .story-proof-grid{grid-template-columns:1fr}
+}
+@media(min-width:801px) and (max-height:580px){
+  .story-proof.showcase-slide{height:auto;min-height:calc(100dvh - var(--header))}
+}
+.capability-section .capability-slide-cards{
+  position:relative;
+  isolation:isolate;
+}
+.capability-section .capability-slide-cards::before{
+  content:"";
+  position:absolute;
+  inset:0 calc((100% - 100vw) / 2);
+  z-index:-1;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(8,30,29,.88),rgba(8,30,29,.68)),
+    var(--capability-landscape) var(--capability-landscape-position,center) / cover no-repeat;
+}
+#ai-travel-modes{
+  --capability-landscape:url("assets/晨雾河谷背景.webp");
+  --capability-landscape-position:center 48%;
+}
+#ai-agent-modes{
+  --capability-landscape:url("assets/云海湖泊背景.webp");
+  --capability-landscape-position:center 56%;
+}
+#ai-trip-actions{
+  --capability-landscape:url("assets/journey_original.jpg");
+  --capability-landscape-position:center 62%;
+}
+.capability-slide-cards .capability-card{
+  background:rgba(15,45,40,.88);
+}

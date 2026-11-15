@@ -129,14 +129,41 @@
     { title: 'AI 上色', image: 'result-colorize.webp', description: '黑白旅行照片由模型上色。画面可在应用内核对，衣物与天空的颜色仍需要旅行者判断。' }
   ];
   let aiFlipIndex = 0;
-  function setAiFlip(index) {
+  let aiFlipRequest = 0;
+  let photoReveal;
+  async function setAiFlip(index, direction = Math.sign(index - aiFlipIndex)) {
+    const request = ++aiFlipRequest;
     aiFlipIndex = (index + aiFlipPages.length) % aiFlipPages.length;
     const page = aiFlipPages[aiFlipIndex];
     const src = `assets/${page.image}`;
-    $('#aiFlipDetail').src = src;
-    $('#aiFlipDetail').alt = `${page.title}后的山路照片`;
-    $('#aiFlipZoom').dataset.preview = page.image;
-    $('#aiFlipZoom').dataset.lightbox = `${src}|${page.title}实测|${page.description}`;
+    const image = $('#aiFlipDetail');
+    const frame = $('#aiFlipZoom');
+    if (image.getAttribute('src') === src) return;
+    const nextImage = new Image();
+    nextImage.src = src;
+    try {
+      await nextImage.decode();
+    } catch {
+      if (request === aiFlipRequest) {
+        aiFlipIndex = aiFlipPages.findIndex(item => image.src.endsWith(item.image));
+      }
+      return;
+    }
+    if (request !== aiFlipRequest) return;
+    photoReveal?.cancel();
+    frame.style.removeProperty('--previous-photo');
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && image.animate) {
+      frame.style.setProperty('--previous-photo', `url("${image.src}")`);
+      const reveal = image.animate(
+        [{ clipPath: direction < 0 ? 'inset(0 0 0 100%)' : 'inset(0 100% 0 0)' }, { clipPath: 'inset(0)' }],
+        { duration: 360, easing: 'cubic-bezier(.22,.72,.23,1)' }
+      );
+      photoReveal = reveal;
+      reveal.onfinish = () => frame.style.removeProperty('--previous-photo');
+    }
+    image.src = src;
+    image.alt = `${page.title}后的山路照片`;
+    frame.dataset.lightbox = `${src}|${page.title}实测|${page.description}`;
     $('#aiFlipCount').textContent = `${String(aiFlipIndex + 1).padStart(2, '0')} / ${String(aiFlipPages.length).padStart(2, '0')}`;
     $('#aiFlipTitle').textContent = page.title;
     $('#aiFlipDescription').textContent = page.description;
@@ -270,10 +297,31 @@
   $('#presenterClose').addEventListener('click', () => presenter.close());
   presenter.addEventListener('click', event => { if (event.target === presenter) presenter.close(); });
   presenter.addEventListener('close', () => document.body.classList.remove('dialog-open'));
+  let chapterTransition;
   $$('[data-present]').forEach(button => button.addEventListener('click', () => {
     const target = $(`#${button.dataset.present}`);
+    if (!target) return;
     presenter.close();
-    target?.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
+    document.body.classList.remove('dialog-open');
+    const root = document.documentElement;
+    const offset = target.getBoundingClientRect().top - (parseFloat(getComputedStyle(root).getPropertyValue('--header')) || 0);
+    const jump = () => target.scrollIntoView({ behavior: 'instant', block: 'start' });
+    chapterTransition?.skipTransition();
+    if (!document.startViewTransition || Math.abs(offset) < 24 ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      jump();
+      return;
+    }
+    root.dataset.pageTurn = offset < 0 ? 'back' : 'forward';
+    const transition = document.startViewTransition(jump);
+    chapterTransition = transition;
+    const clearTurn = () => {
+      if (chapterTransition === transition) {
+        delete root.dataset.pageTurn;
+        chapterTransition = undefined;
+      }
+    };
+    transition.finished.then(clearTurn, clearTurn);
   }));
   let seconds = 0;
   let timerId = null;
@@ -314,6 +362,10 @@
     const selected = navLinks.find(link => link.hash === `#${currentSection?.id}`);
     navLinks.forEach(link => link.classList.toggle('is-current', link === selected));
     let currentHash = currentSection?.id && currentSection.id !== 'top' ? `#${currentSection.id}` : '';
+    if (currentSection?.id === 'ai-live') {
+      const story = $('#ai-story-proof').getBoundingClientRect();
+      if (story.top <= activationLine && story.bottom > activationLine) currentHash = '#ai-story-proof';
+    }
     if (currentSection?.id === 'journey') {
       const currentChapter = journeyChapters.find(chapter => {
         const bounds = chapter.getBoundingClientRect();
