@@ -4,14 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#10272a">
-  <meta name="description" content="枢游记，围绕出发、探索、记录与回看的 HarmonyOS 旅行全周期智能服务。">
+  <meta name="description" content="枢游记 HarmonyOS 旅行应用实测：AI 去雾、增强、上色、旅程整理、照片故事，以及服务卡片、系统相册、语音日记与多设备体验。">
   <title>枢游记 · 把旅行连成一段故事</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800;900&family=Noto+Serif+SC:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/山水旅程-hero.png">
   <link rel="stylesheet" href="styles.css?v=20261025-journey-v8">
-  <script src="app.js?v=20261025-journey-v8" defer></script>
+  <link rel="stylesheet" href="live.css?v=20261115-trip-flow">
+  <link rel="stylesheet" href="presentation-fix.css?v=20261115-fanjing">
+  <script src="app.js?v=20261115-fanjing" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
@@ -24,8 +26,11 @@
       </a>
       <nav class="primary-nav" id="primaryNav" aria-label="页面章节">
         <a href="#journey">旅行主线</a>
-        <a href="#repair">影像修复</a>
         <a href="#intelligence">智能探索</a>
+        <a href="#field-guide">景区与天气</a>
+        <a href="#repair">影像修复</a>
+        <a href="#ai-live">AI 实测</a>
+        <a href="#ai-capabilities">AI 全景</a>
         <a href="#memory">旅行记忆</a>
         <a href="#devices">设备适配</a>
         <a href="#proof">验证边界</a>
@@ -43,23 +48,24 @@
       <div class="hero-shade" aria-hidden="true"></div>
       <div class="container hero-inner">
         <div class="hero-copy">
-          <p class="hero-kicker"><span class="route-dot"></span> HARMONYOS 旅行全周期智能服务</p>
-          <h1 id="heroTitle">把旅行，<br><em>连成一段故事。</em></h1>
-          <p class="hero-lead">从出发前的计划，到旅途中的发现、照片修复与记录，再到多年后重新打开。枢游记让每一段旅程都有来处，也有下文。</p>
+          <p class="hero-kicker"><span class="route-dot"></span> 鸿蒙原生体验 × 真实 AI 返回</p>
+          <h1 id="heroTitle">从想去铜仁，<br><em>到写下这段旅程。</em></h1>
+          <p class="hero-lead">先问智能体、查景区与天气，再安排路线；旅途中拍照修图、记录花费，回来后整理照片、故事和下一次出发的备忘。</p>
+          <div class="hero-proof-strip" aria-label="首页展示的能力"><span>一条完整旅行流程</span><span>应用内真实截图</span><span>HarmonyOS 原生体验</span></div>
           <div class="hero-buttons">
-            <a class="button button-light" href="#journey">沿着旅程探索 <span aria-hidden="true">↘</span></a>
-            <a class="text-link" href="#repair">直接看真实界面 <span aria-hidden="true">↗</span></a>
+            <a class="button button-light" href="#journey">跟着旅程往下走 <span aria-hidden="true">↘</span></a>
+            <a class="text-link" href="#field-guide">看地点与天气实测 <span aria-hidden="true">↗</span></a>
           </div>
         </div>
         <div class="hero-aside" aria-label="产品体验概览">
-          <div class="hero-marker"><span>01</span><i></i><span>04</span></div>
-          <p>一条旅行主线<br>四个连续时刻</p>
+          <div class="hero-marker"><span>AI</span><i></i><span>HarmonyOS</span></div>
+          <p>真实应用截图<br>可放大核对</p>
           <div class="hero-device">
-            <img src="assets/手机端主页.png?v=20261025-journey-v8" width="1280" height="2832" alt="枢游记手机端首页，展示修复和文化知识入口">
+            <img src="assets/ai_app_home.jpeg" width="1280" height="2832" alt="当前枢游记应用首页，显示 AI 已配置和旅行照片修复入口">
           </div>
         </div>
       </div>
-      <div class="hero-foot container"><span>向下滚动，旅程会自己展开</span><span class="hero-scroll" aria-hidden="true"><i></i></span><span>真实界面与项目工程素材</span></div>
+      <div class="hero-foot container"><span>从出发前开始</span><span class="hero-scroll" aria-hidden="true"><i></i></span><span>计划 · 探索 · 拍摄 · 记录</span></div>
     </section>
 
     <section class="prologue section-pad" id="problem" aria-labelledby="problemTitle">
@@ -81,8 +87,9 @@
     <section class="journey-section" id="journey" aria-labelledby="journeyTitle">
       <div class="container journey-heading">
         <div class="section-index"><span>第一章</span><span>ONE CONNECTED JOURNEY</span></div>
-        <h2 id="journeyTitle">跟随一次旅行，<br>看功能如何自然发生。</h2>
-        <p>向下滚动，依次走过出发前、旅行中、旅行后与长期陪伴；每个阶段都能查看完整界面。</p>
+        <h2 id="journeyTitle">从决定出发，到整理旅行记忆</h2>
+        <p>先确定目的地，再查询、规划、拍摄和记录。每一步都对应应用里的实际入口；截图可点击查看原始画面。</p>
+        <div class="travel-route" aria-label="旅行操作顺序"><a href="#intelligence">询问智能体</a><a href="#field-guide">查景区与天气</a><a href="#chapter-before">制定行程</a><a href="#repair">拍照修图</a><a href="#chapter-during">记录花费</a><a href="#memory">写记忆与备忘</a></div>
         <nav class="journey-phase-links" aria-label="旅行阶段">
           <a href="#chapter-before" data-journey-link="before">01 出发前</a>
           <a href="#chapter-during" data-journey-link="during">02 旅行中</a>
@@ -95,10 +102,10 @@
           <article class="journey-chapter" id="chapter-before" data-scene="before">
             <div class="chapter-copy">
               <span class="chapter-number">01 / BEFORE</span>
-              <h3>出发前，<br>先把未知变成计划。</h3>
-              <p>通过位置匹配与天气服务理解环境，用目的地知识提前了解文化，再把想去的地方组织成旅行计划和行程项。</p>
-              <ul><li>天气查询与生活建议</li><li>文化知识与可追问的智能体</li><li>旅行计划和行程状态</li></ul>
-              <a href="#intelligence" class="chapter-link">探索智能能力 <span aria-hidden="true">↗</span></a>
+              <h3>出发前，<br>把想去的地方排进行程。</h3>
+              <p>先向智能体询问铜仁，再查本地景区图谱与目的地天气。确认信息后创建旅行计划，安排要去的景点、日期和待办。</p>
+              <ul><li>智能体问答与本地景区资料</li><li>桂林、铜仁等地点搜索与天气候选</li><li>旅行计划和行程状态</li></ul>
+              <a href="#field-guide" class="chapter-link">查看地点查询实测 <span aria-hidden="true">↗</span></a>
             </div>
             <figure class="chapter-mobile-media"><button type="button" class="chapter-image-zoom" data-lightbox="assets/旅行计划.png|旅行计划|出发前的计划与行程界面"><img src="assets/旅行计划.png?v=20261025-journey-v8" width="1280" height="2832" loading="lazy" alt="枢游记旅行计划界面"><span>查看完整截图 ↗</span></button><figcaption>真实界面 · 旅行计划</figcaption></figure>
           </article>
@@ -106,18 +113,18 @@
             <div class="chapter-copy">
               <span class="chapter-number">02 / ON THE ROAD</span>
               <h3>旅行中，<br>把注意力留给现场。</h3>
-              <p>需要时修复雾天照片、记下一笔花费或一项备忘。入口清楚，记录不必打断正在发生的体验。</p>
-              <ul><li>去雾、清晰化与手动修图</li><li>分类花费与统计</li><li>优先级备忘与完成状态</li></ul>
+              <p>到了景区先用系统相册选择照片，保留原图再尝试去雾、增强或上色；车票和餐食等花费随手记下，避免回家后补猜。</p>
+              <ul><li>拍照、选图与 AI / 本地修复</li><li>原图和结果并排核对</li><li>分类记录实际花费</li></ul>
               <a href="#repair" class="chapter-link">查看影像流程 <span aria-hidden="true">↗</span></a>
             </div>
-            <figure class="chapter-mobile-media"><button type="button" class="chapter-image-zoom" data-lightbox="assets/手机端主页.png|旅行中的修复入口|当前应用的照片上传与处理入口"><img src="assets/手机端主页.png?v=20261025-journey-v8" width="1280" height="2832" loading="lazy" alt="枢游记当前修复首页，提供照片上传、去雾与增强入口"><span>查看完整截图 ↗</span></button><figcaption>新版原生界面 · 修复入口</figcaption></figure>
+            <figure class="chapter-mobile-media"><button type="button" class="chapter-image-zoom" data-lightbox="assets/ai_defog_retest_pair_full.jpeg|旅行照片修复|应用内山路原图与去雾结果"><img src="assets/ai_defog_retest_pair_full.jpeg" width="1280" height="2832" loading="lazy" alt="枢游记应用内山路照片的原图与去雾结果"><span>查看完整截图 ↗</span></button><figcaption>应用实测 · 山路照片去雾</figcaption></figure>
           </article>
           <article class="journey-chapter" id="chapter-after" data-scene="after">
             <div class="chapter-copy">
               <span class="chapter-number">03 / AFTER</span>
               <h3>回家后，<br>让照片重新讲述故事。</h3>
-              <p>照片、地点与文字汇聚成旅行记忆。用户可以编辑、回看，也可以在文字卡住时借助智能续写继续表达。</p>
-              <ul><li>照片、位置与日记统一保存</li><li>旅行记忆创建、编辑与删除</li><li>选中文本后的续写辅助</li></ul>
+              <p>把照片、地点和亲历内容写成旅行记忆。AI 可以帮助起草，但计划中的景点不自动算作已经到访；保存前由旅行者核对。</p>
+              <ul><li>照片、位置与日记统一保存</li><li>旅程整理与照片故事实测返回</li><li>选中文本后的续写辅助</li></ul>
               <a href="#memory" class="chapter-link">看旅行记忆 <span aria-hidden="true">↗</span></a>
             </div>
             <figure class="chapter-mobile-media"><button type="button" class="chapter-image-zoom" data-lightbox="assets/旅行记忆.png|旅行记忆|旅行后的照片、地点与文字入口"><img src="assets/旅行记忆.png?v=20261025-journey-v8" width="1280" height="2832" loading="lazy" alt="枢游记旅行记忆界面"><span>查看完整截图 ↗</span></button><figcaption>真实界面 · 旅行记忆</figcaption></figure>
@@ -125,14 +132,53 @@
           <article class="journey-chapter" id="chapter-continuity" data-scene="continuity">
             <div class="chapter-copy">
               <span class="chapter-number">04 / CONTINUE</span>
-              <h3>把下一步留在备忘录里。</h3>
-              <p>旅程还在继续时，备忘录可以把待办、优先级和日期收在一起。关键操作记录为状态恢复提供依据；当前展示的是新版应用里的备忘录编辑界面。</p>
+              <h3>最后写下备忘，<br>给下一次出发留个起点。</h3>
+              <p>把还没完成的事放进备忘录，设置优先级和日期。花费、记忆与计划仍留在同一趟旅程里，回看时能分清安排与亲历。</p>
               <ul><li>设置提醒内容、优先级与日期</li><li>旅行计划、备忘和花费沿着旅程组织</li><li>重启后的状态恢复可按演示环境核对</li></ul>
               <a href="#proof" class="chapter-link">了解验证边界 <span aria-hidden="true">↗</span></a>
             </div>
             <figure class="chapter-mobile-media"><button type="button" class="chapter-image-zoom" data-lightbox="assets/备忘录.png|旅行备忘|长期陪伴中的备忘编辑界面"><img src="assets/备忘录.png?v=20261025-journey-v8" width="1280" height="2832" loading="lazy" alt="新版枢游记备忘录编辑界面"><span>查看完整截图 ↗</span></button><figcaption>新版界面 · 旅行备忘</figcaption></figure>
           </article>
         </div>
+      </div>
+    </section>
+
+    <section class="intelligence-section section-pad" id="intelligence" aria-labelledby="intelligenceTitle">
+      <div class="container">
+        <div class="section-index"><span>第三章</span><span>ASK · UNDERSTAND · CREATE</span></div>
+        <div class="split-heading">
+          <h2 id="intelligenceTitle">先问清楚，<br>再动身。</h2>
+          <p>问智能体铜仁有什么值得看，切换本地资料核对景区，再把答案落实到行程。点击查看应用中的界面。</p>
+        </div>
+        <div class="intelligence-layout">
+          <div class="ai-selector" role="tablist" aria-label="智能服务场景">
+            <button type="button" role="tab" aria-selected="true" data-ai="culture"><b>01</b><span>文化知识<small>本地资料 + AI 追问</small></span></button>
+            <button type="button" role="tab" aria-selected="false" data-ai="photo"><b>02</b><span>智能对话<small>梵净山问答实测</small></span></button>
+            <button type="button" role="tab" aria-selected="false" data-ai="command"><b>03</b><span>旅行计划<small>查看和管理行程</small></span></button>
+            <button type="button" role="tab" aria-selected="false" data-ai="writing"><b>04</b><span>旅行记忆<small>新建记忆与照片地图</small></span></button>
+          </div>
+          <div class="ai-display" id="aiPanel" role="tabpanel">
+            <div class="ai-caption"><span id="aiLabel">文化知识 / 本地资料与智能体</span><strong id="aiTitle">选择查资料，或继续问智能体</strong></div>
+            <button class="ai-image" type="button" id="aiZoom" aria-label="放大查看文化知识模式切换界面">
+              <img id="aiImage" src="assets/culture-modes-real.png" width="578" height="517" loading="lazy" alt="文化知识界面显示本地资料与智能体两种模式">
+            </button>
+          </div>
+          <aside class="ai-context"><p id="aiDescription">应用的文化知识卡片有本地资料和智能体两种模式。本地资料查询已收录景区；智能体使用已配置的 AI 接口回答具体问题。</p><div class="ai-source"><span>文化知识获取</span><div class="knowledge-modes"><div><b>本地资料库</b><small>查询应用内收录的景区内容</small><em>无需 AI 接口</em></div><div><b>AI 智能体追问</b><small>围绕目的地继续对话</small><em>需要网络与模型接口</em></div></div><button hidden id="aiGraphProof" class="capability-link" type="button" data-lightbox="assets/graph-session.jpeg|景区知识图谱|应用内本地景区节点与社区"><img src="assets/graph-session.jpeg" width="1280" height="2832" loading="lazy" alt="应用内景区知识图谱"><span>放大查看本地知识图谱 ↗</span></button><strong id="aiSource">Local Knowledge · AI Agent</strong></div></aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="field-section section-pad" id="field-guide" aria-labelledby="fieldTitle">
+      <div class="container">
+        <div class="section-index"><span>出发前 / 实际查询</span><span>PLACE · WEATHER · KNOWLEDGE</span></div>
+        <div class="split-heading"><h2 id="fieldTitle">先认清目的地，<br>再决定怎么走。</h2><p>在应用里输入地名，先选准地点，再查看天气和景区关联。以下都是应用运行画面；天气会随查询时间变化。</p></div>
+        <div class="field-grid">
+          <article class="field-proof"><div class="field-copy"><span>01 · 文化知识</span><h3>本地资料与智能体，各有入口。</h3><p>本地资料直接查应用收录的景区；选择智能体后，使用已配置的 AI 接口继续提问。右图是实际模式切换界面。</p></div><button type="button" data-lightbox="assets/culture-modes-real.png|文化知识模式|应用内本地资料与智能体两个入口"><img src="assets/culture-modes-real.png" loading="lazy" alt="应用文化知识界面，显示本地资料与智能体模式" width="578" height="517"></button></article>
+          <article class="field-proof"><div class="field-copy"><span>02 · 地点天气</span><h3>输入桂林，先确认广西的桂林。</h3><p>地点搜索返回同名候选，选定广西桂林后再查询实时天气。铜仁也能用中文搜索；不把任意同名地点直接当成目的地。</p></div><button type="button" data-lightbox="assets/weather-guilin-candidates-real.jpeg|桂林地点候选|应用实测的桂林地点搜索候选列表"><img src="assets/weather-guilin-candidates-real.jpeg" loading="lazy" alt="应用内桂林地点搜索候选，可选择广西桂林" width="1280" height="2832"></button></article>
+          <article class="field-proof"><div class="field-copy"><span>03 · 景区知识</span><h3>铜仁有什么值得了解的景区？</h3><p>应用内问答返回梵净山等已收录景区。图谱可搜索地区和景点并查看关联节点；收录范围以本地数据为准。</p></div><button type="button" data-lightbox="assets/tongren-knowledge-real.png|铜仁景区问答|应用内铜仁知识查询的实际回答"><img src="assets/tongren-knowledge-real.png" loading="lazy" alt="应用内关于铜仁景区的问答截图" width="649" height="603"></button></article>
+          <article class="field-proof"><div class="field-copy"><span>04 · 本地图谱</span><h3>从地区找到关联景点。</h3><p>图谱按社区和区域展示节点数量，搜索或点击后查看关系。界面所显示的节点来自应用内置资料。</p></div><button type="button" data-lightbox="assets/graph-session.jpeg|景区知识图谱|应用内本地景区知识图谱运行画面"><img src="assets/graph-session.jpeg" loading="lazy" alt="应用内景区知识图谱运行截图" width="1280" height="2832"></button></article>
+        </div>
+        <p class="field-note">网页展示操作证据；实时天气请求、智能体对话和图谱交互发生在鸿蒙应用中。<button type="button" data-lightbox="assets/weather-guilin-result-real.jpeg|广西桂林实时天气|应用选择桂林地点后的天气结果">查看桂林天气结果 ↗</button></p>
       </div>
     </section>
 
@@ -146,9 +192,8 @@
         <div class="repair-workbench">
           <div class="repair-nav" role="tablist" aria-label="影像修复方式">
             <button type="button" role="tab" aria-selected="true" data-repair="entry"><span>01</span><strong>新版修复首页</strong><small>当前应用的照片处理入口</small></button>
-            <button type="button" role="tab" aria-selected="false" data-repair="dehaze"><span>02</span><strong>去雾</strong><small>本地 WebView 处理 · 无需 API</small></button>
-            <button type="button" role="tab" aria-selected="false" data-repair="enhance"><span>03</span><strong>AI 清晰化</strong><small>4× 超分 · 需要后端 API</small></button>
-            <button type="button" role="tab" aria-selected="false" data-repair="edit"><span>04</span><strong>手动编辑</strong><small>保留即时调整与个人判断</small></button>
+            <button type="button" role="tab" aria-selected="false" data-repair="enhance"><span>02</span><strong>AI 增强</strong><small>真实应用前后对比</small></button>
+            <button type="button" role="tab" aria-selected="false" data-repair="edit"><span>03</span><strong>手动编辑</strong><small>保留即时调整与个人判断</small></button>
           </div>
           <div class="repair-preview" id="repairPanel" role="tabpanel">
             <button class="image-zoom" type="button" id="repairZoom" aria-label="放大查看新版修复首页">
@@ -167,27 +212,62 @@
       </div>
     </section>
 
-    <section class="intelligence-section section-pad" id="intelligence" aria-labelledby="intelligenceTitle">
+    <section class="live-section section-pad" id="ai-live" aria-labelledby="liveTitle">
       <div class="container">
-        <div class="section-index"><span>第三章</span><span>ASK · UNDERSTAND · CREATE</span></div>
-        <div class="split-heading">
-          <h2 id="intelligenceTitle">目的地不只是一条搜索结果。</h2>
-          <p>从知识入口、智能客服到旅行计划与记忆记录。点击查看四张从当前应用取得的完整界面截图。</p>
+        <div class="showcase-slide live-slide-compare">
+        <div class="section-index"><span>实测现场</span><span>REAL APP · REAL OUTPUT</span></div>
+        <div class="live-heading"><div><p class="live-eyebrow">阿里云百炼 · HarmonyOS 模拟器</p><h2 id="liveTitle">AI 真正做了什么，<br>直接看结果。</h2></div><p>以下图片来自 2026 年 11 月 13 日应用内实测。修图使用应用内置山路旅行场景照片；生成式结果可能重绘细节，因此保留原图对照和本地处理入口。</p></div>
+        <div class="comparison-intro"><div><span>同一张山路照片</span><h3>应用去雾结果与原图</h3></div><p>左侧可放大查看去雾后的照片。山谷里仍能看到云雾。</p></div>
+        <div class="comparison-grid">
+          <figure class="comparison-panel comparison-result"><button type="button" data-lightbox="assets/result-defog.webp|AI 去雾结果|从应用实测画面提取的去雾照片"><img src="assets/result-defog.webp" width="1024" height="576" loading="lazy" alt="AI 去雾后的山路照片"></button><figcaption><b>01 AI 去雾结果</b><span>点击放大照片 ↗</span></figcaption></figure>
+          <figure class="comparison-panel"><img src="assets/journey_original.jpg" width="1672" height="941" loading="lazy" alt="应用内置山路旅行场景原图，山谷有自然云雾"><figcaption><b>02 原图</b><span>应用内置旅行照片 · 未处理</span></figcaption></figure>
         </div>
-        <div class="intelligence-layout">
-          <div class="ai-selector" role="tablist" aria-label="智能服务场景">
-            <button type="button" role="tab" aria-selected="true" data-ai="culture"><b>01</b><span>文化知识<small>本地资料 + AI 追问</small></span></button>
-            <button type="button" role="tab" aria-selected="false" data-ai="photo"><b>02</b><span>智能对话<small>欢迎信息与快捷入口</small></span></button>
-            <button type="button" role="tab" aria-selected="false" data-ai="command"><b>03</b><span>旅行计划<small>查看和管理行程</small></span></button>
-            <button type="button" role="tab" aria-selected="false" data-ai="writing"><b>04</b><span>旅行记忆<small>新建记忆与照片地图</small></span></button>
+        </div>
+        <div class="showcase-slide live-slide-stories" id="ai-story-proof">
+        <div class="slide-heading"><span>AI 实测 / 02</span><h2>一次修图，一段真实的旅行记录。</h2><p>左侧对比图像模型返回；右侧直接阅读旅行 AI 在应用中的文字。</p></div>
+        <div class="live-lead-grid">
+          <article class="live-hero-card"><div class="live-card-copy"><span>01 / 今日助手</span><h3>下一站是计划，<br>眼前所见是经历。</h3><p>测试输入写明“计划 9 点去明孝陵”，同时记录沿钟山石阶行走与午餐 48 元。今日助手把待完成与已发生的事分开回答。</p><div class="live-tags"><span>实际行程</span><span>计划状态</span><span>明确来源</span></div></div><button class="live-shot" type="button" data-lightbox="assets/ai_scenario_retest_lower.jpeg|今日助手真实返回|应用内今日助手与旅程整理员的实测返回"><img src="assets/ai_scenario_retest_lower.jpeg" width="1280" height="2832" loading="lazy" alt="今日助手与旅程整理员的应用实测返回"><span>放大阅读真实返回 ↗</span></button></article>
+          <article class="live-text-card"><span>02 / AI 旅程整理员</span><h3>把计划与经历分开写。</h3><p>实测输入包括“计划 9 点去明孝陵”“沿钟山石阶走了一段”“午餐 48 元”。返回区分了尚未确认到访的计划与已经发生的见闻，也没有把非票据图片误识别为消费。</p><blockquote>“计划中有明孝陵，但尚未确认是否已到访。已发生的事是沿钟山石阶走了一段，看到树叶变黄。”</blockquote><button class="live-shot live-shot-text" type="button" data-lightbox="assets/ai_scenario_retest_lower.jpeg|旅行 AI 场景真实返回|今日助手、照片故事、旅程整理员与非票据防误识别"><img src="assets/ai_scenario_retest_lower.jpeg" width="1280" height="2832" loading="lazy" alt="旅行 AI 场景中四项实际文字返回的应用截图"><span>阅读完整返回 ↗</span></button></article>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="capability-section section-pad" id="ai-capabilities" aria-labelledby="aiCapabilitiesTitle">
+      <div class="container">
+        <div class="showcase-slide capability-slide-first">
+        <div class="section-index"><span>AI 全景</span><span>IMAGE · VISION · LANGUAGE · AGENT</span></div>
+        <div class="capability-header"><div><p class="live-eyebrow">不只是一张修复照片</p><h2 id="aiCapabilitiesTitle">从看见照片，<br>到读懂旅程。</h2></div><p>影像模型负责修图；视觉模型识别照片和票据；文字模型把计划、实际经历和花费整理成可修改的草稿。下面区分实测结果与已接入的功能入口。</p></div>
+        <div class="capability-grid">
+          <article class="capability-card featured ai-flip-card"><span class="capability-no">01 / 图像生成式编辑 · 已实测</span><div class="ai-flip-layout"><button type="button" class="ai-flip-visual" id="aiFlipZoom" data-lightbox="assets/result-enhance.webp|AI 增强实测|从应用实测画面提取的增强照片"><img id="aiFlipDetail" src="assets/result-enhance.webp" alt="AI 增强后的山路照片" loading="lazy" width="1024" height="576"><span>点击放大照片 ↗</span></button><div class="ai-flip-copy"><span id="aiFlipCount">01 / 02</span><h3 id="aiFlipTitle">AI 增强</h3><p id="aiFlipDescription">查看模型对山路、树影和天空的增强效果。</p><div class="ai-flip-facts"><span>来自应用实测</span><span>点击左侧查看大图</span><span>保存前可自行判断画面变化</span></div><div class="ai-flip-controls"><button type="button" id="aiFlipPrevious" aria-label="查看上一张修图截图">← 上一页</button><button type="button" id="aiFlipNext" aria-label="查看下一张修图截图">下一页 →</button></div><div class="ai-flip-dots" aria-label="当前展示页"><button type="button" data-ai-flip="0" aria-label="查看 AI 增强" aria-current="true"></button><button type="button" data-ai-flip="1" aria-label="查看 AI 上色"></button></div></div></div></article>
+        </div>
+        </div>
+        <div class="showcase-slide capability-slide-cards" id="ai-travel-modes">
+        <div class="slide-heading"><span>AI 全景 / 02</span><h2>旅行中的文字 AI。</h2><p>这四项都已在同一次旅行场景中返回，现场可以点开应用截图核对。</p></div>
+        <div class="capability-grid">
+          <article class="capability-card"><span class="capability-no">02 / 旅程整理 · 已实测</span><h3>只把发生的事写成经历</h3><p>计划去明孝陵，不等于已经到访。整理员将行程、记忆和午餐 48 元组织为第一人称草稿，用户核对后再保存。</p><blockquote>“原计划今早九点去明孝陵，我实际记下的是沿钟山石阶走了一段，看到树叶变黄。午餐花费四十八元。”</blockquote><button class="capability-link" type="button" data-lightbox="assets/ai_scenario_retest_lower.jpeg|旅程整理员实际返回|同一次旅行场景的今日助手、照片故事和旅程整理返回">查看应用内返回 ↗</button></article>
+          <article class="capability-card"><span class="capability-no">03 / 今日助手 · 已实测</span><h3>回答下一站，区分计划和完成</h3><p>读取当天行程与记录，回答“下一站在哪里”。在实测中，模型明确说计划中有明孝陵，但尚未确认是否到访。</p><div class="capability-quote">计划中有明孝陵，但尚未确认是否已到访。</div></article>
+          <article class="capability-card"><span class="capability-no">04 / 照片故事 · 已实测</span><h3>把亲眼所见写成短文</h3><p>由已输入的旅行记忆生成第一人称短文；不把未完成的行程编入亲历故事。结果仍是草稿，保存前可以修改。</p><div class="capability-quote">沿着南京钟山的石阶走了一段，我看到树叶变黄。</div></article>
+          <article class="capability-card"><span class="capability-no">05 / 图片理解与票据 · 已接入</span><h3>看照片，也避免误记花费</h3><p>视觉模型可分析照片内容；票据识别只有找到可信金额才写入候选花费。旅行山景照片的实测返回为“未识别金额”。</p><div class="capability-quote">非票据防误识别：未识别金额</div></article>
+        </div>
+        </div>
+        <div class="showcase-slide capability-slide-cards" id="ai-agent-modes">
+        <div class="slide-heading"><span>AI 全景 / 03</span><h2>从识图到交互入口。</h2><p>以下能力已进入应用工程；界面与真实请求仍以设备端操作为准。</p></div>
+        <div class="capability-grid">
+          <article class="capability-card"><span class="capability-no">06 / 景点知识与写作 · 已实测</span><h3>遇到不懂的景点继续追问</h3><p>本地景区资料可直接查阅；选择智能体后可以围绕目的地追问。铜仁景区问答已有应用内实测截图。</p><button class="capability-link" type="button" data-lightbox="assets/assistant-fanjing-session.jpeg|梵净山问答实测|AI 旅程助手收到问题后的中文回复">查看铜仁问答 ↗</button></article>
+          <article class="capability-card"><span class="capability-no">07 / 照片成卡 · 已接入</span><h3>由照片生成可编辑记忆草稿</h3><p>先用系统相册选照片，再由视觉 AI 提取画面线索并生成文字。应用要求用户核对地点和内容，确认后才保存为旅行记忆。</p><div class="capability-quote">先识图，再写草稿；最后由旅行者确认。</div></article>
+          <article class="capability-card"><span class="capability-no">08 / 智能体对话 · 已接入</span><h3>问景点，也能描述下一步操作</h3><p>智能体支持文本和图片输入、知识问答及对话；指令模式可识别创建计划、备忘和记录花费的意图，引导进入对应操作。</p><div class="capability-quote">问答、识图、计划、备忘和花费，汇到一个入口。</div></article>
+          <article class="capability-card"><span class="capability-no">09 / 选中文字续写 · 已接入</span><h3>在旅行日记里接着写</h3><p>记忆和备忘编辑页提供选中文字后的 AI 续写浮层。生成内容进入编辑区后仍可修改，避免把模型文字直接当作已核实经历。</p><div class="capability-quote">AI 帮忙起草，内容由用户决定。</div></article>
+        </div>
+        <p class="capability-disclaimer">实测画面来自 HarmonyOS 模拟器。模型返回取决于输入与服务状态，实际 AI 请求发生在鸿蒙应用内。</p>
+        </div>
+        <div class="showcase-slide capability-slide-cards" id="ai-trip-actions">
+          <div class="slide-heading"><h2>AI 如何辅助计划、备忘和记账</h2><p>以下三项已在应用代码中接入，实测结果待补。</p></div>
+          <div class="capability-grid">
+            <article class="capability-card"><h3>生成逐日行程草案</h3><p>根据目的地、起止日期、预算和偏好安排每日行程，并提示核对开放时间、票价和交通。</p></article>
+            <article class="capability-card"><h3>检查备忘是否有遗漏</h3><p>根据物品清单和重要事项，给出最多三条具体提醒。</p></article>
+            <article class="capability-card"><h3>提供花费分类建议</h3><p>记账后根据本笔金额、分类和说明给出建议。缺少总预算时，结果不会据此估算余额。</p></article>
           </div>
-          <div class="ai-display" id="aiPanel" role="tabpanel">
-            <div class="ai-caption"><span id="aiLabel">知识页 / 新手引导入口</span><strong id="aiTitle">先了解工具，再继续探索目的地</strong></div>
-            <button class="ai-image" type="button" id="aiZoom" aria-label="放大查看新版知识页与新手引导">
-              <img id="aiImage" src="assets/文化知识获取_智能体.png?v=20261025-journey-v8" width="1280" height="2832" loading="lazy" alt="新版枢游记知识页，展示新手引导与功能介绍">
-            </button>
-          </div>
-          <aside class="ai-context"><p id="aiDescription">新版知识页提供核心功能介绍与可重新打开的新手引导入口。本图呈现知识页当前状态；目的地问答由智能体模式承载，可围绕景点继续深入提问。</p><div class="ai-source"><span>文化知识获取</span><div class="knowledge-modes"><div><b>本地资料库</b><small>已有景区文化内容，可直接展示</small><em>无需 API</em></div><div><b>AI 智能体追问</b><small>模型生成回答与连续对话</small><em>需要网络与模型 API</em></div></div><strong id="aiSource">Knowledge Page · User Guide · Agent Mode</strong></div></aside>
         </div>
       </div>
     </section>
@@ -196,12 +276,12 @@
       <div class="container memory-layout">
         <div class="memory-intro">
           <div class="section-index"><span>第四章</span><span>MEMORY & CONTINUITY</span></div>
-          <h2 id="memoryTitle">一段记忆，<br>不止一张照片。</h2>
-          <p>旅行记忆把照片、地点和文字放回同一个故事里。花费、备忘与计划也留在旅程的上下文中。下次打开时，关键状态可以沿着操作记录找回来。</p>
+          <h2 id="memoryTitle">记下花费，<br>再写这段旅程。</h2>
+          <p>旅途中先记实际支出；回来后把照片、地点和亲历文字写成记忆。最后用备忘录记下未完成的事，给下一次出发留个起点。</p>
           <div class="memory-evidence">
-            <div><span>照片 + 地点 + 文字</span><strong>可回看的旅行记忆</strong></div>
-            <div><span>关键操作日志</span><strong>重启后的状态恢复</strong></div>
-            <div><span>账号与版本</span><strong>自建同步的冲突处理</strong></div>
+            <div><span>旅途中</span><strong>按类别记录实际花费</strong></div>
+            <div><span>回家后</span><strong>整理照片、地点与亲历故事</strong></div>
+            <div><span>下一次</span><strong>用备忘录留下待办和日期</strong></div>
           </div>
         </div>
         <div class="memory-collage">
@@ -250,13 +330,12 @@
     <div class="presenter-time"><span id="timerDisplay" role="timer">00:00</span><button type="button" id="timerToggle">开始计时</button><button type="button" id="timerReset">重置</button></div>
     <p class="presenter-help">点章节跳转页面，并查看对应的现场讲述要点。</p>
     <div class="presenter-list" id="presenterList">
-      <button type="button" data-present="top"><span>00:00–01:00</span><strong>开场 · 旅行碎片</strong><small>用照片、故事、状态丢失三个问题切入</small></button>
-      <button type="button" data-present="journey"><span>01:00–02:30</span><strong>产品主线 · 四个时刻</strong><small>向下滚动，依次展示四段旅程与完整界面</small></button>
-      <button type="button" data-present="repair"><span>02:30–04:15</span><strong>影像修复 · 新版界面</strong><small>展示新版修复首页与手动编辑</small></button>
-      <button type="button" data-present="intelligence"><span>04:15–05:45</span><strong>智能探索 · 知识与对话</strong><small>切换知识入口、对话、计划和记忆页面</small></button>
-      <button type="button" data-present="memory"><span>05:45–07:10</span><strong>旅行记忆 · 把片段连起来</strong><small>结合花费、备忘和状态恢复讲述</small></button>
-      <button type="button" data-present="devices"><span>07:10–08:10</span><strong>多端适配 · 手机与平板画面</strong><small>展示 MatePad Pro 13 模拟器截图并查看完整原图</small></button>
-      <button type="button" data-present="proof"><span>08:10–10:00</span><strong>验证边界与收束</strong><small>区分已验证、已实现和仍需条件</small></button>
+      <button type="button" data-present="top"><span>00:00–00:40</span><strong>开场 · AI 与鸿蒙旅行</strong><small>从一张照片进入修图与旅程记录</small></button>
+      <button type="button" data-present="ai-live"><span>00:40–02:40</span><strong>AI 实测 · 原图与真实返回</strong><small>看去雾、增强、上色和旅程整理员的应用截图</small></button>
+      <button type="button" data-present="ai-capabilities"><span>02:40–04:10</span><strong>AI 全景 · 九类能力</strong><small>区分已实测结果与已接入入口</small></button>
+      <button type="button" data-present="journey"><span>05:40–07:00</span><strong>旅行主线 · 四个时刻</strong><small>出发前、旅行中、旅行后和长期陪伴</small></button>
+      <button type="button" data-present="devices"><span>07:00–08:00</span><strong>多端适配 · 手机与平板</strong><small>查看设备截图与布局</small></button>
+      <button type="button" data-present="proof"><span>08:00–10:00</span><strong>验证边界与收束</strong><small>现场讲清已验证、已接入和待真机验证</small></button>
     </div>
   </dialog>
 </body>

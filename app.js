@@ -45,10 +45,11 @@
       else link.removeAttribute('aria-current');
     });
   }
-  window.addEventListener('scroll', () => {
+  const journeyObserver = new IntersectionObserver(() => {
     if (journeyFrame === null) journeyFrame = window.requestAnimationFrame(syncJourneyLinks);
     scheduleNavSync();
-  }, { passive: true });
+  }, { rootMargin: '-35% 0px -35% 0px', threshold: 0 });
+  journeyChapters.forEach(chapter => journeyObserver.observe(chapter));
   window.addEventListener('resize', syncJourneyLinks, { passive: true });
   syncJourneyLinks();
 
@@ -60,24 +61,15 @@
       facts: [['当前画面', '新版原生修复首页'], ['功能入口', '上传照片后选择修复工具'], ['图片显示', '完整原图比例，可点击放大']],
       title: '新版修复首页'
     },
-    dehaze: {
-      index: '02 / LOCAL IMAGE PROCESSING',
-      heading: '先减轻雾感，\n再找回照片层次。',
-      text: '去雾界面运行在应用内的本地 WebView，处理流程在页面端完成，不需要云端修图 API。此处展示处理链路示意，不伪造前后效果图，也不把旧界面当成新版截图。',
-      facts: [['处理方式', '本地 WebView 图像处理'], ['外部依赖', '无需云端 API'], ['展示状态', '流程示意，非新界面截图']],
-      title: '去雾处理',
-      process: { badge: '本地处理 · 无需 API', title: '去雾处理流程', steps: [['01', '选择照片', '导入旅行原图'], ['02', '调整雾感', '按需设置处理强度'], ['03', '预览结果', '检查效果后保存']] }
-    },
     enhance: {
-      index: '03 / BACKEND INFERENCE',
-      heading: '细节放大，\n需要推理服务接力。',
-      text: '工程里的 4× 图像增强页面会把图片提交到已配置的后端 /enhance 接口，再接收增强结果。要现场看到真实结果，必须有可访问的兼容服务；网页里的流程卡只做说明，不会上传照片或调用 API。',
-      facts: [['处理方式', '4× 超分辨率增强'], ['接口路径', 'POST /enhance'], ['运行条件', '可访问的推理后端']],
-      title: 'AI 图像增强',
-      process: { badge: '需要配置后端 API', title: 'AI 清晰化处理流程', steps: [['01', '选择照片', '在增强页面导入图片'], ['02', '提交推理', '发送到后端 /enhance'], ['03', '接收结果', '返回 4× 增强图像']] }
+      image: 'ai_enhance_compare.jpeg', width: 1280, height: 2832, alt: 'AI 增强在应用中的原图与结果截图', index: '02 / CLOUD AI ENHANCE',
+      heading: '增强之后，\n仍要检查原图细节。',
+      text: '应用已从阿里云图像模型取得增强结果。天空、山体与行人可能发生生成式变化，用户可以在保存前对照原图。',
+      facts: [['处理方式', '已配置的云端图像模型'], ['展示状态', '应用实测返回'], ['保存前', '检查景物是否被重绘']],
+      title: 'AI 增强真实结果'
     },
     edit: {
-      image: '手动修图页面.png', width: 1280, height: 2832, alt: '枢游记手动修图界面', index: '04 / MANUAL EDIT',
+      image: '手动修图页面.png', width: 1280, height: 2832, alt: '枢游记手动修图界面', index: '03 / MANUAL EDIT',
       heading: '自动之外，\n也保留人的判断。',
       text: '手动编辑为用户提供自主调节空间。自动处理负责起点，而画面的最终表达仍由使用者决定。',
       facts: [['处理方式', '手动参数与可视化调整'], ['交互特点', '边看边调、即时反馈'], ['使用场景', '需要个人审美判断的照片']],
@@ -132,9 +124,34 @@
   }
   $$('[data-repair]').forEach(button => button.addEventListener('click', () => setRepair(button.dataset.repair)));
 
+  const aiFlipPages = [
+    { title: 'AI 增强', image: 'result-enhance.webp', description: '查看模型对山路、树影和天空的增强效果。' },
+    { title: 'AI 上色', image: 'result-colorize.webp', description: '黑白旅行照片由模型上色。画面可在应用内核对，衣物与天空的颜色仍需要旅行者判断。' }
+  ];
+  let aiFlipIndex = 0;
+  function setAiFlip(index) {
+    aiFlipIndex = (index + aiFlipPages.length) % aiFlipPages.length;
+    const page = aiFlipPages[aiFlipIndex];
+    const src = `assets/${page.image}`;
+    $('#aiFlipDetail').src = src;
+    $('#aiFlipDetail').alt = `${page.title}后的山路照片`;
+    $('#aiFlipZoom').dataset.preview = page.image;
+    $('#aiFlipZoom').dataset.lightbox = `${src}|${page.title}实测|${page.description}`;
+    $('#aiFlipCount').textContent = `${String(aiFlipIndex + 1).padStart(2, '0')} / ${String(aiFlipPages.length).padStart(2, '0')}`;
+    $('#aiFlipTitle').textContent = page.title;
+    $('#aiFlipDescription').textContent = page.description;
+    $$('[data-ai-flip]').forEach((button, i) => {
+      if (i === aiFlipIndex) button.setAttribute('aria-current', 'true');
+      else button.removeAttribute('aria-current');
+    });
+  }
+  $('#aiFlipPrevious').addEventListener('click', () => setAiFlip(aiFlipIndex - 1));
+  $('#aiFlipNext').addEventListener('click', () => setAiFlip(aiFlipIndex + 1));
+  $$('[data-ai-flip]').forEach(button => button.addEventListener('click', () => setAiFlip(Number(button.dataset.aiFlip))));
+
   const aiCases = {
-    culture: { image: '文化知识获取_智能体.png', width: 1280, height: 2832, alt: '新版枢游记知识页，展示新手引导与功能介绍', label: '文化知识 / 本地资料与智能追问', title: '从景区资料开始，再继续追问', description: '当前截图展示新版知识入口与新手引导；知识内容由本地资料库提供，智能体模式可调用云端模型继续对话。右侧标明两种路径的运行条件，网页本身不会请求模型 API。', source: 'Local Knowledge Base · Cloud AI Agent', zoom: '新版知识入口与新手引导' },
-    photo: { image: '智能客服_新版对话.png', width: 1280, height: 2832, alt: '新版枢游记智能客服对话界面与旅行计划快捷入口', label: '智能助手 / 对话与快捷入口', title: '从一段对话开始，找到合适的旅行工具', description: '这是从当前应用重新截取的智能客服对话界面，展示欢迎说明和旅行计划快捷入口。截图不展示图片识别结果；图片上传入口在修复首页。', source: 'Assistant Chat · Plan Shortcut', zoom: '新版智能客服对话界面' },
+    culture: { image: 'culture-modes-real.png', width: 578, height: 517, alt: '文化知识界面显示本地资料与智能体两种模式', label: '文化知识 / 本地资料与智能体', title: '选择查资料，或继续问智能体', description: '应用的文化知识卡片有本地资料和智能体两种模式。本地资料查询已收录景区；智能体使用已配置的 AI 接口回答具体问题。', source: 'Local Knowledge · AI Agent', zoom: '文化知识模式切换界面' },
+    photo: { image: 'assistant-fanjing-session.jpeg', width: 1280, height: 2832, alt: 'AI 旅程助手回答铜仁梵净山景观问题', label: 'AI 旅程助手 / 应用实测', title: '问梵净山有哪些值得看的景观', description: '在应用内发送梵净山景观问题后，助手用中文回复，提到蘑菇石、红云金顶和云海。对话显示知识图谱命中离线缓存。', source: '应用内提问与回答', zoom: '梵净山问答实测截图' },
     command: { image: '旅行计划.png', width: 1280, height: 2832, alt: '新版枢游记旅行计划列表与计划详情', label: '旅行计划 / 行程管理', title: '把旅行安排放进一张可继续编辑的计划里', description: '当前应用的旅行计划页展示行程状态、日期、备忘和编辑入口。智能客服提供计划模板快捷入口；计划详情以这张新版界面为准。', source: 'TravelPlan · Notes · Expense Entry', zoom: '新版旅行计划页面' },
     writing: { image: '旅行记忆.png', width: 1280, height: 2832, alt: '新版枢游记旅行记忆首页，展示新建记忆与照片地图入口', label: '旅行记忆 / 新建入口', title: '先把地点、照片和故事收进同一段记忆', description: '新版旅行记忆页展示新建记忆、照片地图和照片成卡入口。本图用于说明记忆的记录入口，不再使用旧版续写截图代替当前界面。', source: 'Travel Memory · Photo Map', zoom: '新版旅行记忆页面' }
   };
@@ -152,6 +169,7 @@
     $('#aiTitle').textContent = data.title;
     $('#aiDescription').textContent = data.description;
     $('#aiSource').textContent = data.source;
+    $('#aiGraphProof').hidden = key !== 'photo';
     $('#aiZoom').setAttribute('aria-label', `放大查看${data.zoom}`);
     $('#aiZoom').classList.toggle('is-landscape', data.width > data.height);
     window.setTimeout(() => {
@@ -236,7 +254,7 @@
   $$('[data-lightbox]').forEach(button => button.addEventListener('click', () => {
     const [src, title, description] = button.dataset.lightbox.split('|');
     const image = $('img', button);
-    showLightbox(src, title, description, image.alt, image.naturalWidth, image.naturalHeight);
+    showLightbox(src, title, description, image?.alt || title, image?.naturalWidth || 480, image?.naturalHeight || 1017);
   }));
   $('#lightboxClose').addEventListener('click', () => lightbox.close());
   lightbox.addEventListener('click', event => { if (event.target === lightbox) lightbox.close(); });
@@ -281,7 +299,7 @@
   });
 
   const navLinks = $$('#primaryNav a');
-  const navSections = ['top', 'problem', 'journey', 'repair', 'intelligence', 'memory', 'devices', 'proof']
+  const navSections = ['top', 'problem', 'journey', 'intelligence', 'field-guide', 'repair', 'ai-live', 'ai-capabilities', 'memory', 'devices', 'proof']
     .map(id => $(`#${id}`)).filter(Boolean);
   let navFrame = null;
   let navObserver = null;
